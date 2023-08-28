@@ -1,0 +1,42 @@
+@import "../../sass/variables";
+// mixins
+@import "../../sass/mixins";
+
+.header {
+  background-color: $white;
+  z-index: 100;
+  top: 0;
+  // logo
+  .logo {
+    width: 60px;
+
+    @include screen-up(s) {
+      width: 100px;
+    }
+    @include screen-up(m) {
+      width: 150px;
+    }
+  }
+  .lines {
+    .line {
+      &.line:nth-child(1) {
+        width: 20px;
+      }
+      &.line:nth-child(2) {
+        width: 30px;
+      }
+      &.line:nth-child(3) {
+        width: 25px;
+      }
+      height: 3px;
+      margin: 5px;
+      border-radius: 100px;
+      background-color: $primary;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .brand {
+  }
+}

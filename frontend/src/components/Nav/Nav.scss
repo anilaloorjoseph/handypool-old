@@ -1,0 +1,42 @@
+@import "../../sass/variables";
+
+.menu {
+  background-color: $secondary-transparent;
+  backdrop-filter: blur(2px);
+  min-height: 100vh;
+  ul.main-nav {
+    max-width: 100%;
+    min-width: 300px;
+    border-right: 1px solid $white;
+    margin: 0px;
+
+    li {
+      list-style: none;
+      transition: cubic-bezier(1, 0.29, 0, 0.61) 0.5s;
+      a {
+        color: $title;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        padding-left: 20px;
+        &:hover {
+          color: $primary;
+          background-color: $white;
+        }
+      }
+    }
+  }
+
+  .profile-photo {
+    display: inline-block;
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+  }
+}

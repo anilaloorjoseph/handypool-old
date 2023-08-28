@@ -1,0 +1,25 @@
+@import "../../sass/variables";
+
+.offcanvas {
+  background-color: $white;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  &.offcanvas-start {
+    border-right: none;
+  }
+  ul.main-nav {
+    li {
+      a:hover {
+        background-color: $secondary;
+      }
+    }
+  }
+}
+
+.offcanvas-backdrop {
+  background-color: rgba(0, 0, 0, 0.075);
+  backdrop-filter: blur(5px);
+  &.show {
+    opacity: 1;
+  }
+}

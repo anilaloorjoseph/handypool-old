@@ -1,0 +1,27 @@
+@mixin screen-up($screen) {
+  @if ($screen == "t") {
+    @media only screen and (min-width: 320px) {
+      @content;
+    }
+  }
+  @if ($screen == "s") {
+    @media only screen and (min-width: 576px) {
+      @content;
+    }
+  }
+  @if ($screen == "m") {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+  @if ($screen == "l") {
+    @media only screen and (min-width: 992px) {
+      @content;
+    }
+  }
+  @if ($screen == "x") {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+}
