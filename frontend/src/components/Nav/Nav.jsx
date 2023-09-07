@@ -35,7 +35,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="d-flex flex-column menu pt-custom">
+    <div className="d-flex flex-column menu full-height">
       <div className="profile-photo d-flex w-100 flex-column align-items-center mt-3">
         <img
           src={

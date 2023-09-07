@@ -1,4 +1,19 @@
+@import "../../sass/variables";
+
 .popup-work {
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  z-index: 999;
+  background-color: $black-transparent;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(2px);
   .window-work {
+    min-width: 320px;
+    height: auto;
+    background-color: $white;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
   }
 }

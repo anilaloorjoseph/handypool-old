@@ -94,7 +94,7 @@ const CustomerProfileScreen = () => {
   return isLoading || updatingCustomer ? (
     <Loader />
   ) : (
-    <div className="form-box py-4 px-2">
+    <div className="dashboard shadow-sm p-4">
       <Form onSubmit={submitCustomerUpdate}>
         <Container>
           <Row>
@@ -156,11 +156,22 @@ const CustomerProfileScreen = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formElement7">
                   <label>Image</label>
-                  <Form.Control
-                    type="file"
-                    placeholder="Profile Image"
-                    onChange={(e) => setCustomerImage(e.target.files[0])}
-                  />
+                  <div className="d-flex">
+                    <Form.Control
+                      type="file"
+                      placeholder="Profile Image"
+                      onChange={(e) => setCustomerImage(e.target.files[0])}
+                    />
+                    {customerImage && (
+                      <img
+                        src={URL.createObjectURL(customerImage)}
+                        className="temp-image"
+                        width="50"
+                        height="50"
+                        style={{ objectFit: "cover", borderRadius: "10px" }}
+                      />
+                    )}
+                  </div>
                 </Form.Group>
                 <div className="w-100">
                   <button

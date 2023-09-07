@@ -87,7 +87,7 @@ const RegisterCustomer = () => {
 
           <Form.Group className="mb-3" controlId="name1">
             <Form.Control
-              type="name"
+              type="text"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}

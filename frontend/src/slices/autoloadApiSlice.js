@@ -7,7 +7,7 @@ export const autoloadApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: `${AUTOLOAD_URL}/worktypes`,
       }),
-      providesTags: ["Autload", "WorkTypes"],
+      providesTags: ["Autoload", "WorkTypes"],
     }),
   }),
 });

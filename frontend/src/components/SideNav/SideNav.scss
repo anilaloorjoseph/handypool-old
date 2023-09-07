@@ -2,10 +2,13 @@
 
 .offcanvas {
   background-color: $white;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   &.offcanvas-start {
     border-right: none;
+  }
+  .offcanvas-body {
+    padding: 0;
   }
   ul.main-nav {
     li {

@@ -17,33 +17,30 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (
-    api.endpoint === "registerCustomer" ||
-    api.endpoint === "loginCustomer" ||
-    api.endpoint === "registerWorker" ||
-    api.endpoint === "loginWorker"
-  ) {
-    return result;
-  }
+  const checkEndpointWithoutToken = [
+    "registerCustomer",
+    "loginCustomer",
+    "registerWorker",
+    "loginWorker",
+    "workTypes",
+  ];
 
-  let { auth } = api.getState();
-
-  if (
-    result?.error?.status === 401 ||
-    auth.accessToken === null ||
-    auth.accessToken === ""
-  ) {
+  if (!checkEndpointWithoutToken.includes(api.endpoint)) {
     try {
-      const refreshResult = await baseQuery(
-        "/api/getaccesskey",
-        api,
-        extraOptions
-      );
-      if (refreshResult?.data) {
-        // store the new token
-        api.dispatch(setAccessToken(refreshResult.data));
-        //retry the original query with new access token
-        result = await baseQuery(args, api, extraOptions);
+      let { auth } = api.getState();
+
+      if (result?.error?.status === 401 || !auth.accessToken) {
+        const refreshResult = await baseQuery(
+          "/api/getaccesskey",
+          api,
+          extraOptions
+        );
+        if (refreshResult?.data) {
+          // store the new token
+          api.dispatch(setAccessToken(refreshResult.data));
+          //retry the original query with new access token
+          result = await baseQuery(args, api, extraOptions);
+        }
       }
     } catch (err) {
       api.dispatch(logout());
@@ -53,8 +50,24 @@ const baseQueryWithAuth = async (args, api, extraOptions) => {
   return result;
 };
 
+// Add a timeout wrapper function
+const withTimeout = async (fn, timeout) => {
+  const timeoutPromise = new Promise((_, reject) => {
+    setTimeout(() => {
+      reject(new Error("Request timed out"));
+    }, timeout);
+  });
+
+  try {
+    return await Promise.race([fn, timeoutPromise]);
+  } catch (error) {
+    return { error: { status: 504, statusText: "Request timed out" } };
+  }
+};
+
 export const apiSlice = createApi({
-  baseQuery: baseQueryWithAuth,
+  baseQuery: (args, api, extraOptions) =>
+    withTimeout(baseQueryWithAuth(args, api, extraOptions), 10000), // Set your desired timeout value
   tagTypes: [
     "Customer",
     "Worker",
@@ -63,6 +76,10 @@ export const apiSlice = createApi({
     "Login",
     "Logout",
     "Delete",
+    "Work",
+    "Post",
+    "Autoload",
+    "WorkTypes",
   ],
   endpoints: (builder) => ({}),
 });

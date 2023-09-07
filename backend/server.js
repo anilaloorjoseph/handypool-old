@@ -8,8 +8,8 @@ const port = process.env.PORT || 5000;
 import customerRoutes from "./routes/customerRoutes.js";
 import workerRoutes from "./routes/workerRoutes.js";
 import autoloadRoutes from "./routes/autoloadRoutes.js";
+import workRoutes from "./routes/workRoutes.js";
 import { verifyRefreshToken } from "./middleware/authMiddleware.js";
-import asyncHandler from "express-async-handler";
 import path from "path";
 
 connectDB();
@@ -24,17 +24,12 @@ app.use(cookieParser());
 // @desc provide access key
 // @route GET /api/user/getaccesskey
 // @access private
-app.use(
-  "/api/getaccesskey",
-  verifyRefreshToken,
-  asyncHandler(async (req, res) => {
-    res.end();
-  })
-);
+app.use("/api/getaccesskey", verifyRefreshToken);
 
 app.use("/api/customer", customerRoutes);
 app.use("/api/worker", workerRoutes);
 app.use("/api/autoload", autoloadRoutes);
+app.use("/api/work", workRoutes);
 
 app.get("/", (req, res) => res.send("Server is ready"));
 

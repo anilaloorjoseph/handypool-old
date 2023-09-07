@@ -75,7 +75,9 @@ const RegisterWorker = () => {
     }
   }, [data]);
 
-  return (
+  return isLoading || loadingWorker ? (
+    <Loader />
+  ) : (
     <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-sm mx-auto">
       <img
         src={registerImage}
@@ -98,7 +100,7 @@ const RegisterWorker = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="name1">
             <Form.Control
-              type="name"
+              type="text"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -136,7 +138,7 @@ const RegisterWorker = () => {
                 })}
             </Form.Select>
             <Form.Text className="text-end  fst-italic d-block text-muted">
-              Work Type cannot be changed in future!
+              Type of worker cannot be changed in future!
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3 mt-4 d-flex" controlId="checkbox1">
@@ -160,8 +162,6 @@ const RegisterWorker = () => {
           </div>
         </Form>
       </div>
-      {isLoading && <Loader />}
-      {loadingWorker && <Loader />}
     </div>
   );
 };

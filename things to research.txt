@@ -1,1 +1,0 @@
-react router relative url in this web app . urls like image prepend to browser tab url one level up. i consider this is a issue with react router 

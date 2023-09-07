@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Form, CloseButton } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import "./Popup.scss";
+import "./DeletePopup.scss";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 import { logout } from "../../slices/authSlice";
 import { useDeleteWorkerMutation } from "../../slices/workerApiSlice";
 import { useDeleteCustomerMutation } from "../../slices/customerApiSlice";
 
-const Modal = ({ switchPopup }) => {
+const DeletePopup = ({ switchPopup }) => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
@@ -66,4 +66,4 @@ const Modal = ({ switchPopup }) => {
   );
 };
 
-export default Modal;
+export default DeletePopup;

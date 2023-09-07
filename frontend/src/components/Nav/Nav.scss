@@ -2,12 +2,11 @@
 
 .menu {
   background-color: $secondary-transparent;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
   min-height: 100vh;
   ul.main-nav {
     max-width: 100%;
     min-width: 300px;
-    border-right: 1px solid $white;
     margin: 0px;
 
     li {

@@ -41,7 +41,7 @@ function App() {
       )}
       <div className="d-flex">
         {userInfo && aboveTabScreen && <Nav />}
-        <Container fluid="md" className="my-2 pt-custom">
+        <Container fluid="md" className="full-height">
           <Outlet />
         </Container>
       </div>

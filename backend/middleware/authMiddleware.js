@@ -34,9 +34,8 @@ export const protect = asyncHandler(async (req, res, next) => {
       throw new Error(error?.message);
     }
   } else {
-    res.end();
-    // res.status(401);
-    // throw new Error("Token is necessary!");
+    res.status(401);
+    throw new Error("Token is necessary!");
   }
 });
 
@@ -61,9 +60,7 @@ export const verifyRefreshToken = asyncHandler(async (req, res) => {
       res.status(401);
       throw new Error(error?.message);
     }
-  }
-
-  if (!refreshToken) {
+  } else {
     res.end();
   }
 });

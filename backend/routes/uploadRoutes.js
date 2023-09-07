@@ -32,7 +32,12 @@ const storage = multer.diskStorage({
         break;
       }
       case "/post": {
-        if (file.fieldname === "postImage") {
+        if (
+          file.fieldname === "workImage1" ||
+          file.fieldname === "workImage2" ||
+          file.fieldname === "workImage3" ||
+          file.fieldname === "workImage4"
+        ) {
           if (
             !fs.existsSync(`./uploads/customer/${req.customer._id}/postimage`)
           ) {

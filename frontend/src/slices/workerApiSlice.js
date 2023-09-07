@@ -30,6 +30,14 @@ export const workersApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: `${WORKER_URL}/profile`,
       }),
+      // // Use the queryFn option to set the timeout
+      // queryFn: async (api, queryArg, options, extraOptions) => {
+      //   const response = await api.fetchBaseQuery(queryArg, {
+      //     ...options,
+      //     timeout: 10000, // Set the timeout value in milliseconds
+      //   });
+      //   return response;
+      // },
       providesTags: ["Worker", "Profile"],
     }),
     updateWorker: builder.mutation({

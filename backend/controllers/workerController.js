@@ -99,15 +99,36 @@ const updateWorkerProfile = asyncHandler(async (req, res) => {
     }
   }
 
+  const parsedLocations = JSON.parse(locations);
+
   if (worker) {
-    const location = await Location.find({
-      "location.workType": worker.workType,
-      "location.worker": req.worker._id,
-    });
+    const compareLocations = (a, b) =>
+      a.length === b.length && a.every((e, i) => e === b[i]);
+
+    if (!compareLocations(worker.locations, parsedLocations)) {
+      const { deletedCount } = await Location.deleteMany({
+        worker: req.worker._id,
+        workType: req.worker.workType,
+      });
+
+      if (parsedLocations.length > 0) {
+        const docsToInsert = parsedLocations.map((pincode) => ({
+          pincode,
+          workType: req.worker.workType,
+          worker: req.worker._id,
+        }));
+        const insertNewLocations = await Location.insertMany(docsToInsert);
+
+        if (!insertNewLocations) {
+          res.status(406);
+          throw new Error("Something went wrong with updating locations!");
+        }
+      }
+    }
 
     worker.name = name || worker.name;
     worker.email = email || worker.email;
-    worker.locations = JSON.parse(locations);
+    worker.locations = parsedLocations;
     worker.phone = phone || worker.phone;
     worker.aboutMe = aboutMe || worker.aboutMe;
 
@@ -168,7 +189,9 @@ const deleteWorkerProfile = asyncHandler(async (req, res) => {
 
     await Worker.deleteOne({ _id: req.worker._id });
 
-    res.json({ status: "Account has been deleted!" });
+    res
+      .clearCookie("refreshToken", "", { httpOnly: true, sameSite: "Strict" })
+      .json({ status: "Account has been deleted!" });
   } else {
     res.status(404);
     throw new Error("Warning : Wrong password!");

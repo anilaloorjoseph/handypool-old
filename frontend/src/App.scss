@@ -14,12 +14,10 @@
 //h1-h6
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   color: $title;
 }
+h4,
 h5,
 h6 {
   color: $primary;
@@ -82,7 +80,12 @@ a {
 
 // form
 form {
-  .form-control,
+  input[type="text"].form-control,
+  input[type="date"].form-control,
+  input[type="email"].form-control,
+  input[type="number"].form-control,
+  input[type="password"].form-control,
+  textarea.form-control,
   .form-select {
     border: none;
     border-bottom: 2px solid $secondary;
@@ -143,6 +146,12 @@ form {
   border-radius: 10px;
 }
 
+.dashboard {
+  height: 100%;
+  background-color: $secondary-transparent;
+  backdrop-filter: blur(3px);
+}
+
 // login register box
 .login-register {
   background-color: $white;
@@ -159,10 +168,36 @@ form {
 .image {
   object-fit: cover;
 }
+input[type="file"] {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  padding: 0;
+  margin: 0 5px 0 0;
+  border-width: 0;
+  &::before {
+    content: "Click to upload";
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid $primary;
+    position: absolute;
+    border-radius: 10px;
+    border: 2px dashed $primary;
+    font-weight: 600;
+  }
+  &:focus {
+    box-shadow: 0 0 0 1px $white;
+  }
+}
 
 // custom paddings
-.pt-custom {
-  padding-top: 80px;
+.full-height {
+  padding-top: 60px;
+  min-height: 100vh;
 }
 
 .locations {

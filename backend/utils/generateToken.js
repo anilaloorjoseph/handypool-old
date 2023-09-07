@@ -20,7 +20,7 @@ const generateToken = {
 
   accessToken: (userId, isWorker) => {
     const token = jwt.sign({ id: userId }, process.env.JWT_SECRET_ACCESS, {
-      expiresIn: "10s",
+      expiresIn: "600s",
     });
 
     return isWorker ? `BearerWorker ${token}` : `BearerCustomer ${token}`;

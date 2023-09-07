@@ -131,7 +131,7 @@ const WorkerProfileScreen = () => {
   return isLoading || updatingWorker ? (
     <Loader />
   ) : (
-    <div className="form-box py-4 px-2">
+    <div className="dashboard shadow-sm p-4">
       <h2 className="ps-2 text-center mt-3">Profile</h2>
       <Form onSubmit={submitWorkerUpdate}>
         <Container>
@@ -185,11 +185,23 @@ const WorkerProfileScreen = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formElement8">
                   <label>Image</label>
-                  <Form.Control
-                    type="file"
-                    placeholder="Profile Image"
-                    onChange={(e) => setWorkerImage(e.target.files[0])}
-                  />
+                  <div className="d-flex">
+                    <Form.Control
+                      type="file"
+                      placeholder="Profile Image"
+                      onChange={(e) => setWorkerImage(e.target.files[0])}
+                      className="image-upload"
+                    />
+                    {workerImage && (
+                      <img
+                        src={URL.createObjectURL(workerImage)}
+                        className="temp-image"
+                        width="50"
+                        height="50"
+                        style={{ objectFit: "cover", borderRadius: "10px" }}
+                      />
+                    )}
+                  </div>
                 </Form.Group>
               </div>
             </Col>

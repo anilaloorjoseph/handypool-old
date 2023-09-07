@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const locationScheam = mongoose.Schema({
-  location: {
+const locationScheam = mongoose.Schema(
+  {
     pincode: {
       type: String,
       required: true,
@@ -16,13 +16,14 @@ const locationScheam = mongoose.Schema({
       required: true,
       ref: "Worker",
     },
+    country: {
+      type: String,
+      required: true,
+      default: "India",
+    },
   },
-  country: {
-    type: String,
-    required: true,
-    default: "India",
-  },
-});
+  { timestamps: true }
+);
 
 const Location = mongoose.model("Location", locationScheam);
 

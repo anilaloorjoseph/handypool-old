@@ -155,7 +155,9 @@ const deleteCustomerProfile = asyncHandler(async (req, res) => {
 
     await Customer.deleteOne({ _id: req.customer._id });
 
-    res.json({ status: "Account has been deleted!" });
+    res
+      .clearCookie("refreshToken", "", { httpOnly: true, sameSite: "Strict" })
+      .json({ status: "Account has been deleted!" });
   } else {
     res.status(404);
     throw new Error("Warning : Wrong password!");
