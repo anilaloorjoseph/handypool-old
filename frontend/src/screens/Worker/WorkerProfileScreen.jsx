@@ -131,7 +131,7 @@ const WorkerProfileScreen = () => {
   return isLoading || updatingWorker ? (
     <Loader />
   ) : (
-    <div className="dashboard shadow-sm p-4">
+    <div className=" p-4">
       <h2 className="ps-2 text-center mt-3">Profile</h2>
       <Form onSubmit={submitWorkerUpdate}>
         <Container>

@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const workersWorkSchema = mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const workersWorkSchema = mongoose.Schema(
           required: true,
           ref: "Work",
         },
-        read: {
+        isRead: {
           type: Boolean,
           required: true,
           default: false,

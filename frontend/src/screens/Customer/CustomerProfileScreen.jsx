@@ -94,7 +94,7 @@ const CustomerProfileScreen = () => {
   return isLoading || updatingCustomer ? (
     <Loader />
   ) : (
-    <div className="dashboard shadow-sm p-4">
+    <div className="p-4">
       <Form onSubmit={submitCustomerUpdate}>
         <Container>
           <Row>

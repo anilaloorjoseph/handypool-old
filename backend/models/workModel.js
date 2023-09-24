@@ -14,6 +14,17 @@ const responseSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+const acceptedWorkerSchema = mongoose.Schema(
+  {
+    worker: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      ref: "Worker",
+    },
+  },
+  { timestamps: true }
+);
+
 const workSchema = mongoose.Schema(
   {
     customer: {
@@ -48,6 +59,7 @@ const workSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
+    acceptedWorkers: [acceptedWorkerSchema],
     responses: [responseSchema],
   },
   { timestamps: true }

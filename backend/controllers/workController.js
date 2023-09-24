@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Work from "../models/workModel.js";
 import CustomersWork from "../models/customersWorkModel.js";
 import Location from "../models/locationModel.js";
+import WorkersWork from "../models/workersWorkModel.js";
 
 // @desc post work
 // @route POST /api/work/post
@@ -27,16 +28,44 @@ const postWork = asyncHandler(async (req, res) => {
     images,
   });
 
-  const customersWork = await CustomersWork.create({
+  const customerWork = await CustomersWork.create({
     customer: req.customer._id,
     works: work._id,
   });
 
-  const locationsWithWorkers = await Location.find({ pincode, workType });
+  const locationWithWorkers = await Location.find({ pincode, workType });
 
-  console.log(locationsWithWorkers);
+  const insertWork = async (workerId, customerWorkId) => {
+    let workerWork = await WorkersWork.findOne({ worker: workerId });
 
-  if (work && customersWork) {
+    if (!workerWork) {
+      await WorkersWork.create({
+        worker: workerId,
+        works: [{ work: customerWorkId, isRead: false }],
+      });
+    } else {
+      workerWork.works.push({ work: customerWorkId, isRead: false });
+
+      await workerWork.save();
+    }
+  };
+
+  const storeWorksInWorkers = Promise.all(
+    locationWithWorkers.map(async (locationWithWorker, key) => {
+      try {
+        await insertWork(locationWithWorker.worker, customerWork._id);
+      } catch (error) {
+        res.status(500);
+        throw new Error(error);
+      }
+    })
+  );
+
+  const result = await storeWorksInWorkers;
+
+  // send notifications to workers
+
+  if (work && customerWork && result) {
     res.status(201).json({ message: "Work has been posted!" });
   } else {
     res.status(400);

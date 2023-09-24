@@ -85,6 +85,9 @@ const getWorkerProfile = asyncHandler(async (req, res) => {
   res.status(200).json(workerProfile);
 });
 
+// @desc Update worker
+// @route PUT /api/worker/profile
+// @access Private
 const updateWorkerProfile = asyncHandler(async (req, res) => {
   const { name, email, locations, phone, password, aboutMe } = req.body;
 
