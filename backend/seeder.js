@@ -11,8 +11,8 @@ connectDB();
 
 const importData = async () => {
   try {
-    // await WorkType.deleteMany();
-    // await WorkType.insertMany(workTypes);
+    await WorkType.deleteMany();
+    await WorkType.insertMany(workTypes);
     // =============================================================
     // await Worker.deleteMany();
     // await Worker.insertMany(workers);
