@@ -31,8 +31,6 @@ app.use("/api/worker", workerRoutes);
 app.use("/api/autoload", autoloadRoutes);
 app.use("/api/work", workRoutes);
 
-app.get("/", (req, res) => res.send("Server is ready"));
-
 // Location static folder for image upload
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
