@@ -53,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-sm mx-auto">
+    <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-lg mx-auto">
       <img
         src={loginImage}
         className="image d-none d-sm-block"

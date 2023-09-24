@@ -39,4 +39,10 @@
   }
   .brand {
   }
+  button {
+    font-size: 10px;
+    @include screen-up(m) {
+      font-size: 18px;
+    }
+  }
 }

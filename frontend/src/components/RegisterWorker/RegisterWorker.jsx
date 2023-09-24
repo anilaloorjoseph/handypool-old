@@ -1,4 +1,4 @@
-import { Form, Row, Col, Container } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterWorkerMutation } from "../../slices/workerApiSlice";
@@ -78,7 +78,7 @@ const RegisterWorker = () => {
   return isLoading || loadingWorker ? (
     <Loader />
   ) : (
-    <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-sm mx-auto">
+    <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-lg mx-auto">
       <img
         src={registerImage}
         className="image d-none d-sm-block"
