@@ -44,7 +44,7 @@ function App() {
           <Col md={4} lg={3}>
             {userInfo && aboveTabScreen && <Nav />}
           </Col>
-          <Col md={!userInfo ? 12 : 8} lg={9}>
+          <Col md={!userInfo ? 12 : 8} lg={!userInfo ? 12 : 9}>
             <Container fluid="md" className="full-height">
               <Outlet />
             </Container>
