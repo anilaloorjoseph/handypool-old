@@ -131,13 +131,13 @@ const WorkerProfileScreen = () => {
   return isLoading || updatingWorker ? (
     <Loader />
   ) : (
-    <div className=" p-4">
-      <h2 className="ps-2 text-center mt-3">Profile</h2>
+    <div className="p-4">
       <Form onSubmit={submitWorkerUpdate}>
-        <Container>
+        <Container fluid>
           <Row>
-            <Col md={12} lg={6}>
-              <div className="form-box m-2 p-4 shadow-sm">
+            <Col md={12}>
+              <div className="form-box p-4 shadow-sm">
+                <h2 className="ps-2 text-center">Profile</h2>
                 <h5 className="mb-3">Personal Information</h5>
                 <Form.Group className="mb-3" controlId="formElement1">
                   <label>Name</label>
@@ -203,10 +203,7 @@ const WorkerProfileScreen = () => {
                     )}
                   </div>
                 </Form.Group>
-              </div>
-            </Col>
-            <Col md={12} lg={6}>
-              <div className="form-box m-2 p-4  shadow-sm">
+                <hr />
                 <h5 className="mb-3">Work Information</h5>
                 <Form.Group className="mb-3" controlId="formElement7">
                   <label>Type of work</label>
@@ -267,14 +264,17 @@ const WorkerProfileScreen = () => {
                   style={{ height: "100px" }}
                   onChange={(e) => setAboutMe(e.target.value)}
                 />
+                <div className="w-100 mt-3">
+                  <button
+                    type="submit"
+                    className="button shadow d-block mx-auto"
+                  >
+                    Update
+                  </button>
+                </div>
               </div>
             </Col>
           </Row>
-          <div className="w-100 mt-3">
-            <button type="submit" className="button shadow ms-auto d-block">
-              Update
-            </button>
-          </div>
         </Container>
       </Form>
     </div>

@@ -11,7 +11,13 @@ export const workApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Work", "Post"],
     }),
+    getNewWorks: builder.query({
+      query: () => ({
+        url: `${WORK_URL}/getnewworks`,
+      }),
+      providesTags: ["Work", "GetNewWorks"],
+    }),
   }),
 });
 
-export const { useWorkMutation } = workApiSlice;
+export const { useWorkMutation, useGetNewWorksQuery } = workApiSlice;

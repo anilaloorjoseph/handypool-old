@@ -80,6 +80,7 @@ export const apiSlice = createApi({
     "Post",
     "Autoload",
     "WorkTypes",
+    "GetNewWorks",
   ],
   endpoints: (builder) => ({}),
 });

@@ -1,6 +1,6 @@
 import Header from "./components/Header/Header";
 import { Outlet } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
@@ -39,12 +39,18 @@ function App() {
       {!aboveTabScreen && userInfo && (
         <SideNav show={show} handleClose={handleClose} />
       )}
-      <div className="d-flex">
-        {userInfo && aboveTabScreen && <Nav />}
-        <Container fluid="md" className="full-height">
-          <Outlet />
-        </Container>
-      </div>
+      <Container fluid>
+        <Row>
+          <Col md={4} lg={3}>
+            {userInfo && aboveTabScreen && <Nav />}
+          </Col>
+          <Col md={!userInfo ? 12 : 8} lg={9}>
+            <Container fluid="md" className="full-height">
+              <Outlet />
+            </Container>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

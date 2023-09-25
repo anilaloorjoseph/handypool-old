@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutCustomerMutation } from "../../slices/customerApiSlice";
 import { useLogoutWorkerMutation } from "../../slices/workerApiSlice";
+import { useGetNewWorksQuery } from "../../slices/workApiSlice";
 import { logout } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import "./Nav.scss";
@@ -15,6 +16,12 @@ const Nav = () => {
   const [logoutCustomer, { isLoading }] = useLogoutCustomerMutation();
   const [logoutWorker, { isLoading: loadingWorker }] =
     useLogoutWorkerMutation();
+  const {
+    data: newWorks,
+    isFetching,
+    isLoading: isLoadingNewWorks,
+    error,
+  } = useGetNewWorksQuery();
 
   const customerLogout = async () => {
     try {

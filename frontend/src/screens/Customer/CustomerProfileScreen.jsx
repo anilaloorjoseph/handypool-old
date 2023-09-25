@@ -96,10 +96,10 @@ const CustomerProfileScreen = () => {
   ) : (
     <div className="p-4">
       <Form onSubmit={submitCustomerUpdate}>
-        <Container>
+        <Container fluid>
           <Row>
-            <Col xs={12} md={{ span: 6, offset: 3 }}>
-              <div className="form-box mx-2 my-5 p-4  shadow-sm">
+            <Col md={12}>
+              <div className="form-box my-5 p-4  shadow-sm">
                 <h2 className="ps-2 text-center">Profile</h2>
                 <h5>Personal Information</h5>
                 <Form.Group className="mb-3" controlId="formElement1">
