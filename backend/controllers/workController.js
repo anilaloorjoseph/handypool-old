@@ -73,4 +73,12 @@ const postWork = asyncHandler(async (req, res) => {
   }
 });
 
-export { postWork };
+// @desc get new works for worker
+// @route api/work/getnewworks
+// @access private
+const getNewWorks = asyncHandler(async (req, res) => {
+  // req.worker._id
+  res.send("got it ");
+});
+
+export { postWork, getNewWorks };

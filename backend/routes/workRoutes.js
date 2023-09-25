@@ -1,5 +1,5 @@
 import express from "express";
-import { postWork } from "../controllers/workController.js";
+import { postWork, getNewWorks } from "../controllers/workController.js";
 
 import upload from "./uploadRoutes.js";
 
@@ -18,5 +18,7 @@ router.post(
   ]),
   postWork
 );
+
+router.get("/getnewworks", protect, getNewWorks);
 
 export default router;
