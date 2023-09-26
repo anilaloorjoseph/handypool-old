@@ -75,7 +75,8 @@
   }
 
   .what-we-offer,
-  .benefits {
+  .benefits,
+  .how-it-works {
     img {
       width: 100%;
       height: 350px;
@@ -87,6 +88,12 @@
     }
     ul {
       list-style: disc;
+    }
+    .material-symbols-outlined {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      color: $primary;
     }
   }
 }

@@ -197,6 +197,13 @@ input[type="file"] {
   min-height: 100vh;
 }
 
+// footer style
+footer {
+  background-color: $footer;
+  height: 50vh;
+  width: 100%;
+}
+
 .locations {
   small {
     border-radius: 5px;

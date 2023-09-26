@@ -51,6 +51,7 @@ function App() {
           </Col>
         </Row>
       </Container>
+      <footer></footer>
     </div>
   );
 }

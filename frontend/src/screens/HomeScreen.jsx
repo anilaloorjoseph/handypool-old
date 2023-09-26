@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import "./Screen.scss";
+import "./HomeScreen.scss";
 import woodcutter from "../assets/images/woodcutter.jpg";
 import bulb from "../assets/images/bulb.svg";
 
@@ -14,9 +14,9 @@ const HomeScreen = () => {
           </h1>
           <button className="button">Let's find</button>
           <div className="scroll-animation">
-            <div class="water-drop"></div>
-            <div class="water-drop"></div>
-            <div class="water-drop"></div>
+            <div className="water-drop"></div>
+            <div className="water-drop"></div>
+            <div className="water-drop"></div>
           </div>
         </div>
       </div>
@@ -77,6 +77,34 @@ const HomeScreen = () => {
           </Row>
         </Container>
       </div>
+      <div className="how-it-works py-5">
+        <Container>
+          <h4 className="pb-4 text-center">How it works !</h4>
+          <Row>
+            <Col sm={3} className="d-flex flex-column align-items-center mb-5">
+              <span className="material-symbols-outlined">
+                app_registration
+              </span>
+              <small className="py-2 text-center">Register as customer</small>
+            </Col>
+            <Col sm={3} className="d-flex flex-column align-items-center mb-5">
+              <span className="material-symbols-outlined">post_add</span>
+              <small className="py-2 text-center">Post your work</small>
+            </Col>
+            <Col sm={3} className="d-flex flex-column align-items-center mb-5">
+              <span className="material-symbols-outlined">conditions</span>
+              <small className="py-2 text-center">Choose best worker</small>
+            </Col>
+            <Col sm={3} className="d-flex flex-column align-items-center mb-5">
+              <span className="material-symbols-outlined">
+                connect_without_contact
+              </span>
+              <small className="py-2 text-center">Contact the worker</small>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <div className="footer-top"></div>
     </div>
   );
 };
