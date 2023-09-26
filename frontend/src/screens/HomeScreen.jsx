@@ -54,7 +54,7 @@ const HomeScreen = () => {
               <img src={bulb} className="contain" alt="image" />
             </Col>
             <Col md={{ span: 5 }} className="mb-2">
-              <h4 className="pb-4">What we offer</h4>
+              <h4 className="pb-4">Benefits</h4>
 
               <ul>
                 <li className="pb-4">
