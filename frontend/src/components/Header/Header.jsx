@@ -27,7 +27,9 @@ const Header = ({ handleShow }) => {
           </div>
         )}
         <div className="brand">
-          <img src={logo} className="logo" />
+          <a className="me-4" onClick={() => navigate("/")}>
+            <img src={logo} className="logo" />
+          </a>
         </div>
         <div className="button-group d-flex align-items-center">
           {!userInfo && location.pathname == "/" && (

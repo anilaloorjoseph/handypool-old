@@ -53,14 +53,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-lg mx-auto">
-      <img
-        src={loginImage}
-        className="image d-none d-sm-block"
-        loading="lazy"
-      />
+    <div className="login-register mb-5 d-flex flex-column flex-sm-row align-items-stretch mt-5 shadow-lg mx-auto">
+      <div className="image">
+        <img src={loginImage} className="d-none d-sm-block" loading="lazy" />
+      </div>
 
-      <div className="p-3 w-100">
+      <div className="p-3">
         <h2 className="py-2 text-center">Login</h2>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -64,13 +64,11 @@ const RegisterCustomer = () => {
   };
 
   return (
-    <div className="login-register d-flex flex-column flex-sm-row align-items-center mt-5 shadow-lg mx-auto">
-      <img
-        src={registerImage}
-        className="image d-none d-sm-block"
-        loading="lazy"
-      />
-      <div className="p-3 w-100">
+    <div className="login-register mb-5 d-flex flex-column flex-sm-row align-items-stretch mt-5 shadow-lg mx-auto">
+      <div className="image">
+        <img src={registerImage} className="d-none d-sm-block" loading="lazy" />
+      </div>
+      <div className="p-3">
         <h2 className="py-2 text-center">Register</h2>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -80,9 +78,6 @@ const RegisterCustomer = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Form.Text className="text-end  fst-italic d-block text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="name1">
@@ -101,7 +96,7 @@ const RegisterCustomer = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Form.Text className="text-end  fst-italic d-block text-muted">
-              Passoword length should be minimum 8 .
+              Passoword length minimum 8 .
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="password2">

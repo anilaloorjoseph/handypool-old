@@ -1,5 +1,5 @@
 import Header from "./components/Header/Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,8 @@ function App() {
   const [aboveTabScreen, setAboveTabScreen] = useState(() =>
     window.innerWidth > 768 ? true : false
   );
+
+  const location = useLocation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -51,7 +53,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <footer></footer>
+      {location.pathname == "/" && <footer></footer>}
     </div>
   );
 }
