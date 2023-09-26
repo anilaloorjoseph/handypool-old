@@ -36,36 +36,37 @@ label {
 //buttons
 .button {
   display: block;
-  padding: 5px;
-  border-radius: 8px;
+  padding: 5px 10px;
   cursor: pointer;
   font-weight: 600;
   display: inline-block;
-  border: 2px solid $white;
-  color: $primary;
+  border: 2px solid $green-white;
+  color: $secondary;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
+  background-color: $primary;
   &:hover {
-    background-color: $white;
+    background-color: $green-white;
     color: $title;
     border-color: $primary;
   }
   &.button-submit {
-    border: 2px solid $white;
-    color: $white;
+    border: 2px solid $green-white;
+    color: $green-white;
     background-color: $primary;
 
     &:hover {
-      background-color: $white;
+      background-color: $green-white;
       color: $primary;
     }
   }
   &.button-delete {
     border: 2px solid $red;
     color: $red;
+    background-color: $green-white;
     &:hover {
       background-color: $red;
-      color: $white;
+      color: $green-white;
     }
   }
 }
@@ -73,8 +74,10 @@ label {
 //link
 a {
   color: $primary;
+  text-decoration: none;
   &:hover {
     color: $title;
+    cursor: pointer;
   }
 }
 
@@ -93,9 +96,9 @@ form {
     background-color: transparent;
     &:focus {
       color: $text;
-      background-color: $white;
+      background-color: $green-white;
       border-color: $primary;
-      box-shadow: 0 0 0 1px $white;
+      box-shadow: 0 0 0 1px $green-white;
     }
   }
 
@@ -130,7 +133,7 @@ form {
       padding: 0px 10px;
       &:hover {
         background-color: $primary;
-        color: $white;
+        color: $green-white;
       }
     }
   }
@@ -142,13 +145,13 @@ form {
 }
 
 .form-box {
-  background-color: $white;
+  background-color: $green-white;
   border-radius: 10px;
 }
 
 // login register box
 .login-register {
-  background-color: $white;
+  background-color: $green-white;
   border-radius: 10px;
   max-width: 740px;
   img {
@@ -171,7 +174,7 @@ input[type="file"] {
   border-width: 0;
   &::before {
     content: "Click to upload";
-    background-color: $white;
+    background-color: $green-white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,13 +187,13 @@ input[type="file"] {
     font-weight: 600;
   }
   &:focus {
-    box-shadow: 0 0 0 1px $white;
+    box-shadow: 0 0 0 1px $green-white;
   }
 }
 
 // custom paddings
 .full-height {
-  padding-top: 60px;
+  padding-top: 75px;
   min-height: 100vh;
 }
 
@@ -198,7 +201,7 @@ input[type="file"] {
   small {
     border-radius: 5px;
     background-color: $primary;
-    color: $white;
+    color: $green-white;
   }
 }
 

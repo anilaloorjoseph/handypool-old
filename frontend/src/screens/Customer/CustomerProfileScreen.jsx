@@ -99,7 +99,7 @@ const CustomerProfileScreen = () => {
         <Container fluid>
           <Row>
             <Col md={12}>
-              <div className="form-box my-5 p-4  shadow-sm">
+              <div className="form-box my-5 p-4  shadow">
                 <h2 className="ps-2 text-center">Profile</h2>
                 <h5>Personal Information</h5>
                 <Form.Group className="mb-3" controlId="formElement1">

@@ -31,12 +31,9 @@ const Header = ({ handleShow }) => {
         </div>
         <div className="button-group d-flex align-items-center">
           {!userInfo && location.pathname == "/" && (
-            <button
-              className="button  shadow-sm me-2"
-              onClick={() => navigate("/login")}
-            >
-              login
-            </button>
+            <a className="me-4" onClick={() => navigate("/login")}>
+              Login
+            </a>
           )}
           {userInfo === null || userInfo?.isWorker === false ? (
             <button

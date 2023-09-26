@@ -3,7 +3,6 @@
 @import "../../sass/mixins";
 
 .header {
-  background-color: $white;
   z-index: 100;
   top: 0;
   // logo
@@ -42,7 +41,7 @@
   button {
     font-size: 10px;
     @include screen-up(m) {
-      font-size: 18px;
+      font-size: 14px;
     }
   }
 }

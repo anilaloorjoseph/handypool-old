@@ -11,7 +11,7 @@ const WorkerSettingsScreen = () => {
 
   return (
     <Container>
-      <div className="form-box mt-4 p-4">
+      <div className="form-box mt-4 p-4 shadow">
         <div className="d-flex justify-content-between align-items-center">
           <h6>Delete Account ?</h6>
           <button
