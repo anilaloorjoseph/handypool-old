@@ -47,9 +47,9 @@ function App() {
             <Nav />
           </div>
         )}
-        <Container className="full-height">
+        <div className="full-screen">
           <Outlet />
-        </Container>
+        </div>
       </div>
 
       {location.pathname == "/" && <footer></footer>}

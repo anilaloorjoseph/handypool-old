@@ -44,10 +44,10 @@ label {
   color: $secondary;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  background-color: $primary;
+  background-color: $primary-button;
   &:hover {
     background-color: $blue-white;
-    color: $primary;
+    color: $primary-button;
   }
   &.button-delete {
     color: $red;
@@ -59,7 +59,7 @@ label {
   }
   &.button-add {
     color: $secondary;
-    background-color: $primary;
+    background-color: $primary-button;
     &:hover {
       background-color: $secondary;
       color: $primary;
@@ -69,7 +69,7 @@ label {
     background-color: $secondary;
     color: $primary;
     &:hover {
-      background-color: $primary;
+      background-color: $primary-button;
       color: $secondary;
     }
   }
@@ -194,9 +194,10 @@ input[type="file"] {
 }
 
 // custom paddings
-.full-height {
-  padding-top: 75px;
+.full-screen {
+  padding-top: 70px;
   min-height: 100vh;
+  width: 100%;
 }
 
 // footer style

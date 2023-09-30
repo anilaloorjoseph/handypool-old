@@ -4,21 +4,19 @@
 .home-screen {
   .banner {
     width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
 
-    background-image: url("../assets/images/banner.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    .banner-content {
+      transform: translateY(30px);
+      h1 {
+        font-weight: 700;
+        color: $title;
 
-    h1 {
-      font-weight: 700;
-      color: $title;
-      transform: translateY(-30px);
-      &.text-large {
-        font-size: 30px;
-        @include screen-up(m) {
-          font-size: 50px;
+        &.text-large {
+          font-size: 30px;
+          @include screen-up(m) {
+            font-size: 50px;
+          }
         }
       }
     }
@@ -34,11 +32,12 @@
     height: 10vh;
 
     .water-drop {
-      width: 18px;
-      height: 18px;
+      width: 10px;
+      height: 10px;
+      margin: 2px;
       background-color: $primary;
       border-radius: 50%;
-      border: 3px solid $secondary;
+      border: 2px solid $secondary;
 
       animation: drop 3s ease-in-out infinite;
       &:nth-child(2) {
