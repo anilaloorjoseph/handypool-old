@@ -68,6 +68,10 @@ label {
   &.button-inverse {
     background-color: $secondary;
     color: $primary;
+    &:hover {
+      background-color: $primary;
+      color: $secondary;
+    }
   }
 }
 
