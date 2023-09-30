@@ -8,7 +8,6 @@ import Loader from "../Loader/Loader";
 import { useLoginCustomerMutation } from "../../slices/customerApiSlice";
 import { useLoginWorkerMutation } from "../../slices/workerApiSlice";
 import { setCredentials } from "../../slices/authSlice";
-import loginImage from "../../assets/images/login.jpg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -52,53 +51,54 @@ const Login = () => {
     }
   };
 
-  return (
-    <div className="login-register mb-5 d-flex flex-column flex-sm-row align-items-stretch mt-5 shadow-lg mx-auto">
-      <div className="image">
-        <img src={loginImage} className="d-none d-sm-block" loading="lazy" />
-      </div>
+  return loadingCustomer || loadingWorker ? (
+    <Loader />
+  ) : (
+    <div className="login-register mb-5 shadow-lg mx-auto p-3">
+      <h2 className="py-2 text-center">Login</h2>
+      <Form onSubmit={submitHandler}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control
+            type="email"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
 
-      <div className="p-3">
-        <h2 className="py-2 text-center">Login</h2>
-        <Form onSubmit={submitHandler}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control
-              type="email"
-              value={email}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            label={worker ? "Worker" : "Log in as Worker"}
+            onChange={(e) => setWorker(!worker)}
+          />
+        </Form.Group>
+        <p className="w-100 m-0">
+          Create Account !
+          <Link className="px-1" to="/customer/register">
+            Customer
+          </Link>
+          or
+          <Link className="px-1" to="/worker/register">
+            Worker
+          </Link>
+        </p>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              label={worker ? "Worker" : "Log in as Worker"}
-              onChange={(e) => setWorker(!worker)}
-            />
-          </Form.Group>
-          <p className="w-100">
-            new customer ? <Link to="/customer/register">Register</Link>
-          </p>
-          <p className="w-100">
-            new worker ? <Link to="/worker/register">Register</Link>
-          </p>
-          <div className="w-100 d-flex justify-content-end  align-items-baseline">
-            <button className="button button-submit shadow" type="submit">
-              Submit
-            </button>
-          </div>
-        </Form>
-      </div>
+        <div className="w-100 d-flex justify-content-end  align-items-baseline">
+          <button className="button shadow" type="submit">
+            Submit
+          </button>
+        </div>
+      </Form>
 
       {loadingCustomer && <Loader />}
       {loadingWorker && <Loader />}

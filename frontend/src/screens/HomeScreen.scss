@@ -9,22 +9,17 @@
     background-image: url("../assets/images/banner.svg");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 
-    .welcome-message {
-      width: 100%;
-      min-height: inherit;
-      backdrop-filter: blur(3px);
-
-      background: radial-gradient(
-        closest-side,
-        $green-white-glass-high,
-        $green-white-glass-low
-      );
-      h1 {
-        font-weight: 700;
-        color: $title;
-        transform: translateY(-30px);
+    h1 {
+      font-weight: 700;
+      color: $title;
+      transform: translateY(-30px);
+      &.text-large {
+        font-size: 30px;
+        @include screen-up(m) {
+          font-size: 50px;
+        }
       }
     }
   }
@@ -43,7 +38,7 @@
       height: 18px;
       background-color: $primary;
       border-radius: 50%;
-      border: 3px solid $white;
+      border: 3px solid $secondary;
 
       animation: drop 3s ease-in-out infinite;
       &:nth-child(2) {

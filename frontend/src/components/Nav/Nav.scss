@@ -1,13 +1,16 @@
 @import "../../sass/variables";
+@import "../../sass/mixins";
 
 .menu {
   background-color: $secondary;
   backdrop-filter: blur(3px);
   min-height: 100vh;
+  width: 100%;
+  @include screen-up(m) {
+    width: inherit;
+  }
   position: fixed;
   ul.main-nav {
-    max-width: 100%;
-    min-width: 250px;
     margin: 0px;
 
     li {
@@ -24,7 +27,7 @@
         padding-left: 20px;
         &:hover {
           color: $primary;
-          background-color: $white;
+          background-color: $blue-white;
         }
       }
     }

@@ -1,9 +1,9 @@
 import { Navigate,Outlet } from "react-router-dom";
 import {  useSelector } from "react-redux";
 
-function PrivateRoute() {
+function WorkerPrivateRoute() {
     const {userInfo} = useSelector((state) => state.auth)
-  return userInfo ? <Outlet/> :<Navigate to='/login' replace />
+  return userInfo.isWorker === true ?  <Outlet/> :<Navigate to='/login' replace />
 }
 
-export default PrivateRoute
+export default WorkerPrivateRoute

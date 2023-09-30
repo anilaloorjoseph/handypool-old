@@ -78,9 +78,9 @@ const Nav = () => {
         </li>
         <li>
           {userInfo.isWorker ? (
-            <Link to="/worker/work/requests">Requests</Link>
+            <Link to="/worker/work/posts">Works</Link>
           ) : (
-            <Link to="/customer/work/responses">Responses</Link>
+            <Link to="/customer/work/posts">Works</Link>
           )}
         </li>
 

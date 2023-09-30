@@ -39,35 +39,35 @@ label {
   padding: 5px 10px;
   cursor: pointer;
   font-weight: 600;
+  border: none;
   display: inline-block;
-  border: 2px solid $green-white;
   color: $secondary;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   background-color: $primary;
   &:hover {
-    background-color: $green-white;
-    color: $title;
-    border-color: $primary;
+    background-color: $blue-white;
+    color: $primary;
   }
-  &.button-submit {
-    border: 2px solid $green-white;
-    color: $green-white;
-    background-color: $primary;
-
+  &.button-delete {
+    color: $red;
+    background-color: $blue-white;
     &:hover {
-      background-color: $green-white;
+      background-color: $red;
+      color: $blue-white;
+    }
+  }
+  &.button-add {
+    color: $secondary;
+    background-color: $primary;
+    &:hover {
+      background-color: $secondary;
       color: $primary;
     }
   }
-  &.button-delete {
-    border: 2px solid $red;
-    color: $red;
-    background-color: $green-white;
-    &:hover {
-      background-color: $red;
-      color: $green-white;
-    }
+  &.button-inverse {
+    background-color: $secondary;
+    color: $primary;
   }
 }
 
@@ -91,14 +91,17 @@ form {
   textarea.form-control,
   .form-select {
     border: none;
-    border-bottom: 2px solid $secondary;
-    border-radius: 0px;
-    background-color: transparent;
+    border-radius: 5px;
+    background-color: $blue-white;
+    color: $text;
+    box-shadow: 0px 0px 8px rgba(0, 132, 255, 0.452);
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
     &:focus {
-      color: $text;
-      background-color: $green-white;
-      border-color: $primary;
-      box-shadow: 0 0 0 1px $green-white;
+      color: $secondary;
+      background-color: $primary;
+      outline: none;
+      transform: translateY(4px);
     }
   }
 
@@ -133,7 +136,7 @@ form {
       padding: 0px 10px;
       &:hover {
         background-color: $primary;
-        color: $green-white;
+        color: $blue-white;
       }
     }
   }
@@ -145,30 +148,21 @@ form {
 }
 
 .form-box {
-  background-color: $green-white;
+  background-color: $secondary;
   border-radius: 10px;
 }
 
 // login register box
 .login-register {
-  background-color: $green-white;
+  background-color: $secondary;
   border-radius: 10px;
-  max-width: 600px;
-  .image {
-    width: 50%;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px 0px 0px 10px;
-    }
-  }
+  max-width: 400px;
+  background-image: url("./assets/images/login-register.svg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-// image class
-.image {
-  object-fit: cover;
-}
 input[type="file"] {
   width: 100%;
   height: 50px;
@@ -178,7 +172,7 @@ input[type="file"] {
   border-width: 0;
   &::before {
     content: "Click to upload";
-    background-color: $green-white;
+    background-color: $blue-white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +185,7 @@ input[type="file"] {
     font-weight: 600;
   }
   &:focus {
-    box-shadow: 0 0 0 1px $green-white;
+    box-shadow: 0 0 0 1px $blue-white;
   }
 }
 
@@ -204,7 +198,7 @@ input[type="file"] {
 // footer style
 footer {
   background-color: $footer;
-  height: 50vh;
+  height: 20vh;
   width: 100%;
 }
 
@@ -212,10 +206,15 @@ footer {
   small {
     border-radius: 5px;
     background-color: $primary;
-    color: $green-white;
+    color: $blue-white;
+    width: fit-content;
   }
 }
 
 hr {
   color: $text;
+}
+
+.nav-wrapper {
+  width: 250px;
 }

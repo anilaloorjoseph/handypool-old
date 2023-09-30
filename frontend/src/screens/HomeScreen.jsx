@@ -6,18 +6,18 @@ import bulb from "../assets/images/bulb.svg";
 const HomeScreen = () => {
   return (
     <div className="home-screen">
-      <div className="banner mb-5">
-        <div className="welcome-message d-flex justify-content-center align-items-center flex-column text-center">
-          <h1>
-            Welcome to Handypool where
-            <br /> Skills Meet Needs!
-          </h1>
-          <button className="button">Let's find</button>
-          <div className="scroll-animation">
-            <div className="water-drop"></div>
-            <div className="water-drop"></div>
-            <div className="water-drop"></div>
-          </div>
+      <div className="banner mb-5 d-flex flex-column justify-content-center text-center">
+        <h1 className="text-large">
+          Welcome to Handypool where
+          <br /> Skills Meet Needs!
+        </h1>
+        <button className="button button-inverse mx-auto d-block shadow">
+          Let's find
+        </button>
+        <div className="scroll-animation">
+          <div className="water-drop"></div>
+          <div className="water-drop"></div>
+          <div className="water-drop"></div>
         </div>
       </div>
       <div className="what-we-offer py-5">

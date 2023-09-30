@@ -220,7 +220,7 @@ const WorkerProfileScreen = () => {
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formElement5">
-                  <label>Locations (PINCODES)</label>
+                  <label>Pincodes (locations)</label>
                   <InputGroup>
                     <Form.Control
                       type="text"
@@ -231,20 +231,21 @@ const WorkerProfileScreen = () => {
                     <button
                       id="button-addon2"
                       type="button"
+                      className="button-add button"
                       onClick={addToLocations}
                     >
-                      Add
+                      +
                     </button>
                   </InputGroup>
                   {locations && (
-                    <div className="locations">
+                    <div className="locations mt-2">
                       {locations.map((value, index) => {
                         return (
                           <small
-                            className="locations d-flex justify-content-between aling-items-center p-2 m-1"
+                            className="p-2 m-1"
                             key={index}
                           >
-                            {value}{" "}
+                            {value}
                             <CloseButton
                               className="ms-2"
                               onClick={() => deleteLocation(index)}

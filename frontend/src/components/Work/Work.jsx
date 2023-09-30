@@ -223,7 +223,7 @@ const Work = ({ switchPopup }) => {
           </Form.Group>
 
           <div className="w-100 d-flex justify-content-end  align-items-baseline">
-            <button className="button button-submit shadow" type="submit">
+            <button className="button shadow" type="submit">
               Submit
             </button>
           </div>

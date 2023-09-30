@@ -18,7 +18,7 @@ const Header = ({ handleShow }) => {
 
   return (
     <>
-      <div className="header w-100 d-flex justify-content-between position-absolute p-3">
+      <div className="header w-100 d-flex justify-content-between p-3">
         {userInfo && handleShow && (
           <div className="lines" onClick={handleShow}>
             <div className="line"></div>
@@ -33,13 +33,26 @@ const Header = ({ handleShow }) => {
         </div>
         <div className="button-group d-flex align-items-center">
           {!userInfo && location.pathname == "/" && (
-            <a className="me-4" onClick={() => navigate("/login")}>
-              Login
+            <a className="me-4 d-flex" onClick={() => navigate("/login")}>
+              <span class="material-symbols-outlined pe-1">login</span>Login
+            </a>
+          )}
+          {userInfo && location.pathname == "/" && (
+            <a
+              className="me-4 d-flex"
+              onClick={() =>
+                userInfo.isWorker
+                  ? navigate("/worker/profile")
+                  : navigate("/customer/profile")
+              }
+            >
+              <span class="material-symbols-outlined pe-1">person</span>
+              Account
             </a>
           )}
           {userInfo === null || userInfo?.isWorker === false ? (
             <button
-              className="button button-submit shadow me-2"
+              className="button shadow me-2 d-flex align-items-center"
               onClick={switchPopup}
             >
               POST A WORK

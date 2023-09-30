@@ -41,18 +41,17 @@ function App() {
       {!aboveTabScreen && userInfo && (
         <SideNav show={show} handleClose={handleClose} />
       )}
-      <Container fluid>
-        <Row>
-          <Col md={4} lg={3}>
-            {userInfo && aboveTabScreen && <Nav />}
-          </Col>
-          <Col md={!userInfo ? 12 : 8} lg={!userInfo ? 12 : 9}>
-            <Container fluid className="full-height">
-              <Outlet />
-            </Container>
-          </Col>
-        </Row>
-      </Container>
+      <div className="d-flex">
+        {userInfo && aboveTabScreen && location.pathname != "/" && (
+          <div className="nav-wrapper me-5">
+            <Nav />
+          </div>
+        )}
+        <Container className="full-height">
+          <Outlet />
+        </Container>
+      </div>
+
       {location.pathname == "/" && <footer></footer>}
     </div>
   );

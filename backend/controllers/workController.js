@@ -35,6 +35,7 @@ const postWork = asyncHandler(async (req, res) => {
 
   const locationWithWorkers = await Location.find({ pincode, workType });
 
+  // insert work to the workers accordingly
   const insertWork = async (workerId, customerWorkId) => {
     let workerWork = await WorkersWork.findOne({ worker: workerId });
 
@@ -78,7 +79,12 @@ const postWork = asyncHandler(async (req, res) => {
 // @access private
 const getNewWorks = asyncHandler(async (req, res) => {
   // req.worker._id
-  res.send("got it ");
+  console.log(req.worker._id);
+
+  const workersWorks = await workersWork.find({ worker: req.worker._id });
+
+  console.log(workersWorks);
+  res.status(200);
 });
 
 export { postWork, getNewWorks };
