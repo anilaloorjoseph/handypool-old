@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Form, CloseButton } from "react-bootstrap";
 import { useWorkTypesQuery } from "../../slices/autoloadApiSlice";
-import { useWorkMutation } from "../../slices/workApiSlice";
+import { useWorkPostMutation } from "../../slices/workApiSlice";
 import { useSelector } from "react-redux";
-import "./Work.scss";
-import Loader from "../../components/Loader/Loader";
+import "./WorkPost.scss";
+import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
 import { validatePincode } from "../../utilities/validate";
 
@@ -24,7 +24,7 @@ const Work = ({ switchPopup }) => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const { data, isFetching, isLoading, error } = useWorkTypesQuery();
-  const [work, { isLoading: loadingWork }] = useWorkMutation();
+  const [workPost, { isLoading: loadingWorkPost }] = useWorkPostMutation();
 
   const sendWork = async (e) => {
     e.preventDefault();
@@ -66,7 +66,7 @@ const Work = ({ switchPopup }) => {
 
     try {
       // Send the formData using the 'work' function and handle the response
-      const res = await work(formData).unwrap();
+      const res = await workPost(formData).unwrap();
       toast.info("Work has been posted");
     } catch (err) {
       toast.error(err?.data?.message || err.error);

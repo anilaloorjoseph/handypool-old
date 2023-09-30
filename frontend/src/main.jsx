@@ -21,33 +21,28 @@ import CustomerProfileScreen from "./screens/Customer/CustomerProfileScreen";
 import WorkerProfileScreen from "./screens/Worker/WorkerProfileScreen";
 import CustomerSettingsScreen from "./screens/Customer/CustomerSettingsScreen";
 import WorkerSettingsScreen from "./screens/Worker/WorkerSettingsScreen";
-import CustomerWorkResponsesScreen from "./screens/Customer/CustomerWorkResponsesScreen";
+import CustomerPostsScreen from "./screens/Customer/CustomerPostsScreen";
 import WorkerWorkRequestsScreen from "./screens/Worker/WorkerWorkRequestsScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-        <Route index={true} path="/" element={<HomeScreen />} />
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/customer/register" element={<RegisterCustomerScreen />} />
-        <Route path="/worker/register" element={<RegisterWorkerScreen />} />
-      
+      <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/customer/register" element={<RegisterCustomerScreen />} />
+      <Route path="/worker/register" element={<RegisterWorkerScreen />} />
+
       <Route path="" element={<CustomerPrivateRoute />}>
         {/* customer private routes */}
         <Route path="/customer/profile" element={<CustomerProfileScreen />} />
         <Route path="/customer/settings" element={<CustomerSettingsScreen />} />
-        <Route
-          path="/customer/work/posts"
-          element={<CustomerWorkResponsesScreen />}
-        />
-        </Route><Route path="" element={<WorkerPrivateRoute />}>
+        <Route path="/customer/posts" element={<CustomerPostsScreen />} />
+      </Route>
+      <Route path="" element={<WorkerPrivateRoute />}>
         {/* worker private routes */}
         <Route path="/worker/profile" element={<WorkerProfileScreen />} />
         <Route path="/worker/settings" element={<WorkerSettingsScreen />} />
-        <Route
-          path="/worker/work/posts"
-          element={<WorkerWorkRequestsScreen />}
-        />
+        <Route path="/worker/works" element={<WorkerWorkRequestsScreen />} />
       </Route>
     </Route>
   )

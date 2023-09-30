@@ -77,14 +77,14 @@ const postWork = asyncHandler(async (req, res) => {
 // @desc get new works for worker
 // @route api/work/getnewworks
 // @access private
-const getNewWorks = asyncHandler(async (req, res) => {
+const getNoOfNewWorks = asyncHandler(async (req, res) => {
   // req.worker._id
   console.log(req.worker._id);
 
-  const workersWorks = await workersWork.find({ worker: req.worker._id });
+  const workersWorks = await WorkersWork.find({ worker: req.worker._id });
 
   console.log(workersWorks);
   res.status(200);
 });
 
-export { postWork, getNewWorks };
+export { postWork, getNoOfNewWorks };

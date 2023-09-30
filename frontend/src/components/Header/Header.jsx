@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import Work from "../Work/Work";
+import WorkPost from "../WorkPost/WorkPost";
 
 const Header = ({ handleShow }) => {
   const [work, setWork] = useState(false);
@@ -34,7 +34,7 @@ const Header = ({ handleShow }) => {
         <div className="button-group d-flex align-items-center">
           {!userInfo && location.pathname == "/" && (
             <a className="me-4 d-flex" onClick={() => navigate("/login")}>
-              <span class="material-symbols-outlined pe-1">login</span>Login
+              <span className="material-symbols-outlined pe-1">login</span>Login
             </a>
           )}
           {userInfo && location.pathname == "/" && (
@@ -46,7 +46,7 @@ const Header = ({ handleShow }) => {
                   : navigate("/customer/profile")
               }
             >
-              <span class="material-symbols-outlined pe-1">person</span>
+              <span className="material-symbols-outlined pe-1">person</span>
               Account
             </a>
           )}
@@ -60,7 +60,7 @@ const Header = ({ handleShow }) => {
           ) : null}
         </div>
       </div>
-      {work && <Work switchPopup={switchPopup} />}
+      {work && <WorkPost switchPopup={switchPopup} />}
     </>
   );
 };

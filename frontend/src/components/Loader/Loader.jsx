@@ -25,7 +25,7 @@ const Loader = () => {
           height: "50px",
           margin: "auto",
           display: "block",
-          backgroundColor: "rgb(34, 167, 34)",
+          backgroundColor: "rgb(0, 132, 255)",
         }}
       ></Spinner>
     </div>

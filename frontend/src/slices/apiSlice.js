@@ -15,7 +15,6 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithAuth = async (args, api, extraOptions) => {
-  
   let result = await baseQuery(args, api, extraOptions);
 
   const checkEndpointWithoutToken = [
@@ -81,7 +80,8 @@ export const apiSlice = createApi({
     "Post",
     "Autoload",
     "WorkTypes",
-    "GetNewWorks",
+    "GetWorks",
+    "GetNoOfNewWorks",
   ],
   endpoints: (builder) => ({}),
 });

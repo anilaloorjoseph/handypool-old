@@ -3,7 +3,7 @@ const WORK_URL = "/api/work";
 
 export const workApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    work: builder.mutation({
+    workpost: builder.mutation({
       query: (data) => ({
         url: `${WORK_URL}/post`,
         method: "POST",
@@ -11,13 +11,23 @@ export const workApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Work", "Post"],
     }),
-    getNewWorks: builder.query({
+    getNoOfNewWorks: builder.query({
       query: () => ({
-        url: `${WORK_URL}/getnewworks`,
+        url: `${WORK_URL}/getnoofnewworks`,
       }),
-      providesTags: ["Work", "GetNewWorks"],
+      providesTags: ["Work", "GetNoOfNewWorks"],
+    }),
+    getWorks: builder.query({
+      query: () => ({
+        url: `${WORK_URL}/getworks`,
+      }),
+      providesTags: ["Work", "GetWorks"],
     }),
   }),
 });
 
-export const { useWorkMutation, useGetNewWorksQuery } = workApiSlice;
+export const {
+  useWorkPostMutation,
+  useGetNoOfNewWorksQuery,
+  useGetWorksQuery,
+} = workApiSlice;

@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutCustomerMutation } from "../../slices/customerApiSlice";
 import { useLogoutWorkerMutation } from "../../slices/workerApiSlice";
-import { useGetNewWorksQuery } from "../../slices/workApiSlice";
+import {
+  useGetWorksQuery,
+  useGetNoOfNewWorksQuery,
+} from "../../slices/workApiSlice";
 import { logout } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import "./Nav.scss";
@@ -16,12 +19,17 @@ const Nav = () => {
   const [logoutCustomer, { isLoading }] = useLogoutCustomerMutation();
   const [logoutWorker, { isLoading: loadingWorker }] =
     useLogoutWorkerMutation();
+
+  const getWorks = () => {
+    useGetWorksQuery();
+  };
+
   const {
-    data: newWorks,
+    data: newNoOfWorks,
     isFetching,
-    isLoading: isLoadingNewWorks,
+    isLoading: isLoadingNewNoOfWorks,
     error,
-  } = useGetNewWorksQuery();
+  } = useGetNoOfNewWorksQuery();
 
   const customerLogout = async () => {
     try {
@@ -78,9 +86,16 @@ const Nav = () => {
         </li>
         <li>
           {userInfo.isWorker ? (
-            <Link to="/worker/work/posts">Works</Link>
+            <Link
+              to="/worker/works"
+              onClick={() => {
+                getWorks();
+              }}
+            >
+              Works
+            </Link>
           ) : (
-            <Link to="/customer/work/posts">Works</Link>
+            <Link to="/customer/posts">Posted Works</Link>
           )}
         </li>
 
