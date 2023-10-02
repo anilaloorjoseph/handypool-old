@@ -7,6 +7,7 @@ const CustomerSettingsScreen = () => {
 
   const switchPopup = () => {
     setPopup(!popup);
+    document.body.style.overflow = popup === false ? "hidden" : "auto";
   };
 
   return (

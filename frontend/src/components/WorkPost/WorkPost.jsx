@@ -95,7 +95,7 @@ const Work = ({ switchPopup }) => {
   return loadingWorkPost || isLoading ? (
     <Loader />
   ) : (
-    <div className="popup-work d-flex justify-content-center align-items-center">
+    <div className="popup-work d-flex justify-content-center ">
       <div className="window-work p-4 m-4 shadow-lg">
         <div className="d-flex justify-content-between w-100 ">
           <h4>Post Your Work</h4>

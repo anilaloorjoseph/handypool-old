@@ -14,6 +14,7 @@ const Header = ({ handleShow }) => {
 
   const switchPopup = () => {
     setWork(!work);
+    document.body.style.overflow = work === false ? "hidden" : "auto";
   };
 
   return (
