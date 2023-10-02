@@ -11,11 +11,6 @@
     background-size: 100%;
 
     .banner-content {
-      transform: translateY(30px);
-      background-color: $secondary-transparent;
-      border: 1px solid $blue-white-glass-high;
-      padding: 30px 15px 15px 15px;
-      backdrop-filter: blur(10px);
       h1 {
         font-weight: 700;
         color: $title;

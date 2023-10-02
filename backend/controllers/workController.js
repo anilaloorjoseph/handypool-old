@@ -78,13 +78,20 @@ const postWork = asyncHandler(async (req, res) => {
 // @route api/work/getnewworks
 // @access private
 const getNoOfNewWorks = asyncHandler(async (req, res) => {
-  // req.worker._id
-  console.log(req.worker._id);
+  const workersWorks = await WorkersWork.findOne({
+    worker: req.worker._id,
+    works: { $elemMatch: { isRead: false } },
+  });
 
-  const workersWorks = await WorkersWork.find({ worker: req.worker._id });
+  let count = 0;
 
-  console.log(workersWorks);
-  res.status(200);
+  if (workersWorks) {
+    count = workersWorks.works.reduce((acc, work) => {
+      return acc + (work.isRead === false ? 1 : 0);
+    }, 0);
+  }
+
+  res.status(200).json(count);
 });
 
 export { postWork, getNoOfNewWorks };
