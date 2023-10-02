@@ -10,6 +10,10 @@
     background-position: bottom center;
     background-size: 100%;
 
+    @include screen-up(m) {
+      background-position: center;
+    }
+
     .banner-content {
       h1 {
         font-weight: 700;
