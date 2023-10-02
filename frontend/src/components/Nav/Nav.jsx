@@ -2,10 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutCustomerMutation } from "../../slices/customerApiSlice";
 import { useLogoutWorkerMutation } from "../../slices/workerApiSlice";
-import {
-  useGetWorksQuery,
-  useGetNoOfNewWorksQuery,
-} from "../../slices/workApiSlice";
+import { useGetNoOfNewWorksQuery } from "../../slices/workApiSlice";
 import { logout } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import "./Nav.scss";
@@ -19,10 +16,6 @@ const Nav = () => {
   const [logoutCustomer, { isLoading }] = useLogoutCustomerMutation();
   const [logoutWorker, { isLoading: loadingWorker }] =
     useLogoutWorkerMutation();
-
-  const getWorks = () => {
-    useGetWorksQuery();
-  };
 
   const {
     data: newNoOfWorks,
@@ -50,7 +43,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="d-flex flex-column menu full-height">
+    <div className="d-flex flex-column menu full-height mt-5">
       <div className="profile-photo d-flex w-100 flex-column align-items-center mt-3">
         <img
           src={
@@ -86,14 +79,7 @@ const Nav = () => {
         </li>
         <li>
           {userInfo.isWorker ? (
-            <Link
-              to="/worker/works"
-              onClick={() => {
-                getWorks();
-              }}
-            >
-              Works
-            </Link>
+            <Link to="/worker/works">Works</Link>
           ) : (
             <Link to="/customer/posts">Posted Works</Link>
           )}

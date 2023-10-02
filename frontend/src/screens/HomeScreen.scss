@@ -5,6 +5,10 @@
   .banner {
     width: 100%;
     min-height: 80vh;
+    background-image: url("../assets/images/banner.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
 
     .banner-content {
       transform: translateY(30px);
