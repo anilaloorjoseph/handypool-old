@@ -3,7 +3,7 @@ const WORK_URL = "/api/work";
 
 export const workApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    workpost: builder.mutation({
+    workPost: builder.mutation({
       query: (data) => ({
         url: `${WORK_URL}/post`,
         method: "POST",

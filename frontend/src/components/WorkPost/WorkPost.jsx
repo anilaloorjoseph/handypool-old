@@ -92,7 +92,7 @@ const Work = ({ switchPopup }) => {
     }
   }, [data]);
 
-  return loadingWork || isLoading ? (
+  return loadingWorkPost || isLoading ? (
     <Loader />
   ) : (
     <div className="popup-work d-flex justify-content-center align-items-center">

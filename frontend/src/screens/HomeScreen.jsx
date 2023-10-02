@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import "./HomeScreen.scss";
-import woodcutter from "../assets/images/woodcutter.jpg";
+import workertools from "../assets/images/workertools.jpg";
 import bulb from "../assets/images/bulb.svg";
 
 const HomeScreen = () => {
@@ -45,7 +45,7 @@ const HomeScreen = () => {
               </p>
             </Col>
             <Col md={{ span: 5 }} className="mb-2">
-              <img src={woodcutter} alt="image" />
+              <img src={workertools} alt="image" />
             </Col>
           </Row>
         </Container>
