@@ -22,7 +22,7 @@ import WorkerProfileScreen from "./screens/Worker/WorkerProfileScreen";
 import CustomerSettingsScreen from "./screens/Customer/CustomerSettingsScreen";
 import WorkerSettingsScreen from "./screens/Worker/WorkerSettingsScreen";
 import CustomerPostsScreen from "./screens/Customer/CustomerPostsScreen";
-import WorkerWorkRequestsScreen from "./screens/Worker/WorkerWorkRequestsScreen";
+import WorkerWorksScreen from "./screens/Worker/WorkerWorksScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,7 +42,7 @@ const router = createBrowserRouter(
         {/* worker private routes */}
         <Route path="/worker/profile" element={<WorkerProfileScreen />} />
         <Route path="/worker/settings" element={<WorkerSettingsScreen />} />
-        <Route path="/worker/works" element={<WorkerWorkRequestsScreen />} />
+        <Route path="/worker/works" element={<WorkerWorksScreen />} />
       </Route>
     </Route>
   )

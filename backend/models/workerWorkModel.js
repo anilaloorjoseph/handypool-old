@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const workersWorkSchema = mongoose.Schema(
+const workerWorkSchema = mongoose.Schema(
   {
     worker: {
       type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +25,6 @@ const workersWorkSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const WorkersWork = mongoose.model("WorkersWork", workersWorkSchema);
+const WorkerWork = mongoose.model("WorkerWork", workerWorkSchema);
 
-export default WorkersWork;
+export default WorkerWork;

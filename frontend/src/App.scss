@@ -223,3 +223,15 @@ hr {
 .nav-wrapper {
   width: 250px;
 }
+
+.notification {
+  background-color: $primary;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+  border-radius: 20px;
+  color: $secondary;
+  height: 25px;
+  width: 25px;
+  font-size: 12px;
+}

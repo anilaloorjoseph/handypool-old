@@ -1,5 +1,9 @@
 import express from "express";
-import { postWork, getNoOfNewWorks } from "../controllers/workController.js";
+import {
+  postWork,
+  getNoOfNewWorks,
+  getWorks,
+} from "../controllers/workController.js";
 
 import upload from "./uploadRoutes.js";
 
@@ -20,5 +24,7 @@ router.post(
 );
 
 router.get("/getnoofnewworks", protect, getNoOfNewWorks);
+
+router.get("/getworks", protect, getWorks);
 
 export default router;

@@ -48,7 +48,17 @@ function App() {
           </div>
         )}
         <div className="full-screen">
-          <Outlet />
+          {location.pathname == "/" ? (
+            <Outlet />
+          ) : (
+            <Container fluid="md">
+              <Row>
+                <Col md={{ span: 8, offset: 2 }}>
+                  <Outlet />
+                </Col>
+              </Row>
+            </Container>
+          )}
         </div>
       </div>
 

@@ -22,7 +22,9 @@ const Nav = () => {
     isFetching,
     isLoading: isLoadingNewNoOfWorks,
     error,
-  } = useGetNoOfNewWorksQuery();
+  } = useGetNoOfNewWorksQuery(undefined, {
+    skip: userInfo.isWorker ? false : true,
+  });
 
   const customerLogout = async () => {
     try {
@@ -43,7 +45,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="d-flex flex-column menu full-height mt-5">
+    <div className="d-flex flex-column menu full-height pt-5">
       <div className="profile-photo d-flex w-100 flex-column align-items-center mt-3">
         <img
           src={
@@ -79,7 +81,12 @@ const Nav = () => {
         </li>
         <li>
           {userInfo.isWorker ? (
-            <Link to="/worker/works">Works</Link>
+            <Link to="/worker/works">
+              Works
+              {newNoOfWorks > 0 && (
+                <span className="notification ms-2">{newNoOfWorks}</span>
+              )}
+            </Link>
           ) : (
             <Link to="/customer/posts">Posted Works</Link>
           )}

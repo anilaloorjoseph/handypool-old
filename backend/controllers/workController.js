@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import Work from "../models/workModel.js";
 import CustomersWork from "../models/customersWorkModel.js";
 import Location from "../models/locationModel.js";
-import WorkersWork from "../models/workersWorkModel.js";
+import WorkerWork from "../models/workerWorkModel.js";
 
 // @desc post work
 // @route POST /api/work/post
@@ -36,16 +36,16 @@ const postWork = asyncHandler(async (req, res) => {
   const locationWithWorkers = await Location.find({ pincode, workType });
 
   // insert work to the workers accordingly
-  const insertWork = async (workerId, customerWorkId) => {
-    let workerWork = await WorkersWork.findOne({ worker: workerId });
+  const insertWork = async (workerId, workId) => {
+    let workerWork = await WorkerWork.findOne({ worker: workerId });
 
     if (!workerWork) {
-      await WorkersWork.create({
+      await WorkerWork.create({
         worker: workerId,
-        works: [{ work: customerWorkId, isRead: false }],
+        works: [{ work: workId, isRead: false }],
       });
     } else {
-      workerWork.works.push({ work: customerWorkId, isRead: false });
+      workerWork.works.push({ work: workId, isRead: false });
 
       await workerWork.save();
     }
@@ -54,7 +54,7 @@ const postWork = asyncHandler(async (req, res) => {
   const storeWorksInWorkers = Promise.all(
     locationWithWorkers.map(async (locationWithWorker, key) => {
       try {
-        await insertWork(locationWithWorker.worker, customerWork._id);
+        await insertWork(locationWithWorker.worker, work._id);
       } catch (error) {
         res.status(500);
         throw new Error(error);
@@ -78,15 +78,14 @@ const postWork = asyncHandler(async (req, res) => {
 // @route api/work/getnewworks
 // @access private
 const getNoOfNewWorks = asyncHandler(async (req, res) => {
-  const workersWorks = await WorkersWork.findOne({
+  const worker = await WorkerWork.findOne({
     worker: req.worker._id,
-    works: { $elemMatch: { isRead: false } },
   });
 
   let count = 0;
 
-  if (workersWorks) {
-    count = workersWorks.works.reduce((acc, work) => {
+  if (worker) {
+    count = worker.works.reduce((acc, work) => {
       return acc + (work.isRead === false ? 1 : 0);
     }, 0);
   }
@@ -94,4 +93,20 @@ const getNoOfNewWorks = asyncHandler(async (req, res) => {
   res.status(200).json(count);
 });
 
-export { postWork, getNoOfNewWorks };
+// @desc get works for worker
+// @route api/work/getworks
+// @access private
+const getWorks = asyncHandler(async (req, res) => {
+  const { works } = await WorkerWork.findOne({
+    worker: req.worker._id,
+  }).populate("works.work");
+
+  if (works) {
+    res.status(200).json(works);
+  } else {
+    res.status(404);
+    throw new Error("Data havent been found!");
+  }
+});
+
+export { postWork, getNoOfNewWorks, getWorks };
