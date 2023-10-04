@@ -53,7 +53,7 @@ function App() {
           ) : (
             <Container fluid="md">
               <Row>
-                <Col md={{ span: 8, offset: 2 }}>
+                <Col md={{ span: 8, offset: 2 }} className="p-0">
                   <Outlet />
                 </Col>
               </Row>

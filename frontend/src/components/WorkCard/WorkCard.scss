@@ -1,0 +1,42 @@
+@import "../../sass/variables";
+
+.work-card {
+  background-color: $secondary;
+  min-width: 320px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  .card-content {
+    width: 100%;
+    .work-description {
+      border-radius: 5px;
+      color: $text;
+      font-size: 14px;
+      width: 100%;
+      position: relative;
+    }
+    .work-expiration {
+      font-size: 15px;
+      color: $text;
+      font-weight: 500;
+      font-style: italic;
+      background: linear-gradient(to right, $grey, $title, $grey);
+      color: $secondary;
+    }
+    .work-images {
+      img,
+      .no-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+      .no-image {
+        border: 1px dashed $text;
+
+        span {
+          color: $text;
+        }
+      }
+    }
+  }
+}

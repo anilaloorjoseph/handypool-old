@@ -48,6 +48,7 @@ label {
   &:hover {
     background-color: $blue-white;
     color: $primary-button;
+    box-shadow: inset 0px 0px 5px 1px $primary-button;
   }
   &.button-delete {
     color: $red;
@@ -95,17 +96,18 @@ form {
   textarea.form-control,
   .form-select {
     border: none;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: $blue-white;
     color: $text;
-    box-shadow: 0px 0px 8px rgba(0, 132, 255, 0.452);
+
     transform: translateY(0);
     transition: transform 0.3s ease-in-out;
     &:focus {
-      color: $secondary;
-      background-color: $primary;
+      color: $title;
+      background-color: $blue-white;
       outline: none;
       transform: translateY(4px);
+      box-shadow: none;
     }
   }
 
@@ -234,4 +236,11 @@ hr {
   height: 25px;
   width: 25px;
   font-size: 12px;
+}
+
+.text-limited-3l {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

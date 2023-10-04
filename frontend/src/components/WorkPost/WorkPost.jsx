@@ -134,6 +134,7 @@ const Work = ({ switchPopup }) => {
             <Form.Control
               type="number"
               placeholder="Pincode"
+              min="0"
               onChange={(e) => setPincode(e.target.value)}
             />
           </Form.Group>

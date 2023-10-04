@@ -99,7 +99,10 @@ const getNoOfNewWorks = asyncHandler(async (req, res) => {
 const getWorks = asyncHandler(async (req, res) => {
   const { works } = await WorkerWork.findOne({
     worker: req.worker._id,
-  }).populate("works.work");
+  }).populate({
+    path: "works.work",
+    select: "workTitle workDescription expirationDate images pincode",
+  });
 
   if (works) {
     res.status(200).json(works);

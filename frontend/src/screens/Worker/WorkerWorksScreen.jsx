@@ -7,15 +7,14 @@ import { useEffect } from "react";
 const WorkerWorksScreen = () => {
   const { data: works, isFetching, isLoading, error } = useGetWorksQuery();
 
-  useEffect(() => {
-    console.log(works);
-  }, [works]);
-
   return isLoading || isFetching ? (
     <Loader />
   ) : (
     <div>
-      <WorkCard />
+      {works &&
+        works.map((work, key) => {
+          return <WorkCard workDetails={work.work} key={key} />;
+        })}
     </div>
   );
 };
