@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import "./WorkCard.scss";
+import ViewImage from "../VIewImage/ViewImage";
 
 const WorkCard = ({ workDetails }) => {
   const [price, setPrice] = useState();
   const [workId, setWorkId] = useState();
+  const [showDescription, setShowDescription] = useState(false);
+  const [viewImage, setViewImage] = useState(false);
+  const [imageToView, setImageToView] = useState();
 
   const sendPrice = (e) => {
     e.preventDefault();
     if (price) {
     }
+  };
+
+  const showImage = (image) => {
+    setViewImage(!viewImage);
+    image ? setImageToView(image) : setImageToView();
   };
 
   useEffect(() => {
@@ -24,17 +33,40 @@ const WorkCard = ({ workDetails }) => {
         <div className="locations">
           <small className="p-1">{workDetails.pincode}</small>
         </div>
-        <p className="work-description my-2 py-2 text-limited-3l">
-          {workDetails.workDescription}
-        </p>
+
+        <div className="work-description my-2 p-2 hide-text">
+          <div
+            className="work-description-header d-flex justify-content-between align-items-center"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDescription(!showDescription);
+            }}
+          >
+            <h6>Work Description</h6>
+            <button className="button button-expand d-flex align-items-center">
+              <span className="material-symbols-outlined">
+                {showDescription ? "expand_less" : "expand_more"}
+              </span>
+            </button>
+          </div>
+          {showDescription && workDetails.workDescription}
+        </div>
         <div className="work-images d-flex justify-content-between">
           {workDetails.images &&
             workDetails.images.map((image, key) => {
               return image ? (
-                <img src={image} alt="images" key={key} />
+                <img
+                  src={image}
+                  alt="images"
+                  key={key}
+                  onClick={() => showImage(image)}
+                />
               ) : (
-                <div className="no-image d-flex justify-content-center align-items-center">
-                  <span class="material-symbols-outlined">
+                <div
+                  className="no-image d-flex justify-content-center align-items-center"
+                  key={key}
+                >
+                  <span className="material-symbols-outlined">
                     image_not_supported
                   </span>
                 </div>
@@ -63,6 +95,7 @@ const WorkCard = ({ workDetails }) => {
               </button>
             </div>
           </Form>
+          {viewImage && <ViewImage showImage={showImage} image={imageToView} />}
         </div>
       </div>
     </div>

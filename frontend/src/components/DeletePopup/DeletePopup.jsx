@@ -37,7 +37,7 @@ const DeletePopup = ({ switchPopup }) => {
 
   return (
     <div className="popup d-flex justify-content-center">
-      <div className="window d-flex justify-content-between shadow-lg p-4">
+      <div className="window d-flex justify-content-between shadow-lg p-4 ">
         <Form onSubmit={deleteAccount}>
           <div className="d-flex justify-content-between w-100 mb-5 pb-4">
             <h5>Delete !</h5>
