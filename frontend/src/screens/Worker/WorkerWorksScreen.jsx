@@ -1,8 +1,7 @@
 import { useGetWorksQuery } from "../../slices/workApiSlice";
 import Loader from "../../components/Loader/Loader";
-import { toast } from "react-toastify";
 import WorkCard from "../../components/WorkCard/WorkCard";
-import { useEffect } from "react";
+import WorkerPagination from "../../components/Pagination/WorkerWorkPagination/WorkerWorkPagination";
 
 const WorkerWorksScreen = () => {
   const { data: works, isFetching, isLoading, error } = useGetWorksQuery();
@@ -10,11 +9,12 @@ const WorkerWorksScreen = () => {
   return isLoading || isFetching ? (
     <Loader />
   ) : (
-    <div>
+    <div className="position-relative">
       {works &&
         works.map((work, key) => {
           return <WorkCard workDetails={work.work} key={key} />;
         })}
+      <WorkerPagination />
     </div>
   );
 };

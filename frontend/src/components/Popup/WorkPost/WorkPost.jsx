@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Form, CloseButton } from "react-bootstrap";
-import { useWorkTypesQuery } from "../../slices/autoloadApiSlice";
-import { useWorkPostMutation } from "../../slices/workApiSlice";
+import { useWorkTypesQuery } from "../../../slices/autoloadApiSlice";
+import { useWorkPostMutation } from "../../../slices/workApiSlice";
 import { useSelector } from "react-redux";
 import "./WorkPost.scss";
-import Loader from "../Loader/Loader";
+import Loader from "../../Loader/Loader";
 import { toast } from "react-toastify";
-import { validatePincode } from "../../utilities/validate";
+import { validatePincode } from "../../../utilities/validate";
 
 const Work = ({ switchPopup }) => {
   const [workTitle, setWorkTitle] = useState();

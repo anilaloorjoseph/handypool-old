@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container } from "react-bootstrap";
-import DeletePopup from "../../components/DeletePopup/DeletePopup";
+import DeletePopup from "../../components/Popup/DeletePopup/DeletePopup";
 
 const CustomerSettingsScreen = () => {
   const [popup, setPopup] = useState(false);

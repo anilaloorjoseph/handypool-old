@@ -4,7 +4,7 @@ import "./ViewImage.scss";
 const ViewImage = ({ image, showImage }) => {
   return (
     <div className="popup d-flex justify-content-center p-5">
-      <div className="window">
+      <div className="window view-image">
         <CloseButton onClick={() => showImage((image = ""))} />
         <img src={image} alt="404 Not Found!" />
       </div>

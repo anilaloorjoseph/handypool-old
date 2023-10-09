@@ -3,10 +3,10 @@ import { Form, CloseButton } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import "./DeletePopup.scss";
 import { toast } from "react-toastify";
-import Loader from "../Loader/Loader";
-import { logout } from "../../slices/authSlice";
-import { useDeleteWorkerMutation } from "../../slices/workerApiSlice";
-import { useDeleteCustomerMutation } from "../../slices/customerApiSlice";
+import Loader from "../../Loader/Loader";
+import { logout } from "../../../slices/authSlice";
+import { useDeleteWorkerMutation } from "../../../slices/workerApiSlice";
+import { useDeleteCustomerMutation } from "../../../slices/customerApiSlice";
 
 const DeletePopup = ({ switchPopup }) => {
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ const DeletePopup = ({ switchPopup }) => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const [deleteCustomer, { isLoading }] = useDeleteCustomerMutation();
-  const [deleteWorker, { isLoading: deletingWorker }] =
+  const [deleteWorker, { isLoading: isLoadingDeleteWorker }] =
     useDeleteWorkerMutation();
 
   const deleteAccount = async (e) => {
@@ -35,9 +35,11 @@ const DeletePopup = ({ switchPopup }) => {
     }
   };
 
-  return (
-    <div className="popup d-flex justify-content-center">
-      <div className="window d-flex justify-content-between shadow-lg p-4 ">
+  return isLoadingDeleteWorker || isLoading ? (
+    <Loader />
+  ) : (
+    <div className="popup d-flex justify-content-center pt-5">
+      <div className="window d-flex  justify-content-between shadow-lg p-4 ">
         <Form onSubmit={deleteAccount}>
           <div className="d-flex justify-content-between w-100 mb-5 pb-4">
             <h5>Delete !</h5>
