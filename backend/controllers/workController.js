@@ -3,6 +3,7 @@ import Work from "../models/workModel.js";
 import CustomersWork from "../models/customersWorkModel.js";
 import Location from "../models/locationModel.js";
 import WorkerWork from "../models/workerWorkModel.js";
+import mongoose from "mongoose";
 
 // @desc post work
 // @route POST /api/work/post
@@ -97,18 +98,58 @@ const getNoOfNewWorks = asyncHandler(async (req, res) => {
 // @route api/work/getworks
 // @access private
 const getWorks = asyncHandler(async (req, res) => {
-  const { works } = await WorkerWork.findOne({
-    worker: req.worker._id,
-  }).populate({
-    path: "works.work",
-    select: "workTitle workDescription expirationDate images pincode",
-  });
+  const { query } = req.query;
+
+  const page = req.query.page || 1;
+
+  const pageSize = 5;
+
+  const works = await WorkerWork.aggregate([
+    { $match: { worker: new mongoose.Types.ObjectId(req.worker._id) } },
+    { $unwind: "$works" },
+    {
+      $lookup: {
+        from: "works",
+        localField: "works.work",
+        foreignField: "_id",
+        as: "work",
+      },
+    },
+    { $match: { "work.workTitle": { $regex: query, $options: "i" } } },
+
+    {
+      $group: {
+        _id: null,
+        worksLength: { $sum: 1 },
+        data: { $push: "$$ROOT" },
+      },
+    },
+    { $unwind: "$data" },
+
+    {
+      $project: {
+        _id: 0,
+        worksLength: 1,
+        isRead: "$data.works.isRead",
+        createdAt: "$data.createdAt",
+        work: "$data.work",
+      },
+    },
+
+    { $sort: { "works.createdAt": -1 } },
+    { $skip: pageSize * (page - 1) },
+    { $limit: pageSize },
+  ]);
+
+  console.log(works);
+
+  const count = works?.worksLength;
 
   if (works) {
-    res.status(200).json(works);
+    res.status(200).json({ works, page, pages: Math.ceil(count / pageSize) });
   } else {
     res.status(404);
-    throw new Error("Data havent been found!");
+    throw new Error("Data haven't been found!");
   }
 });
 

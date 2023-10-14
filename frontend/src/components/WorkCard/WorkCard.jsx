@@ -22,7 +22,7 @@ const WorkCard = ({ workDetails }) => {
   };
 
   useEffect(() => {
-    setWorkId(workDetails.workId);
+    setWorkId(workDetails.id);
   }, [workDetails]);
 
   return (

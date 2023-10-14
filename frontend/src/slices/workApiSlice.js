@@ -18,8 +18,8 @@ export const workApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Work", "GetNoOfNewWorks"],
     }),
     getWorks: builder.query({
-      query: () => ({
-        url: `${WORK_URL}/getworks`,
+      query: ({ query, page }) => ({
+        url: `${WORK_URL}/getworks?query=${query ? query : null}&page=${page}`,
       }),
       providesTags: ["Work", "GetWorks"],
     }),
