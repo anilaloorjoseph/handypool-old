@@ -98,13 +98,13 @@ const getNoOfNewWorks = asyncHandler(async (req, res) => {
 // @route api/work/getworks
 // @access private
 const getWorks = asyncHandler(async (req, res) => {
-  const { query } = req.query;
+  const searchQuery = req.query.query || "";
 
   const page = req.query.page || 1;
 
-  const pageSize = 5;
+  const pageSize = 3;
 
-  const works = await WorkerWork.aggregate([
+  const pipeline = [
     { $match: { worker: new mongoose.Types.ObjectId(req.worker._id) } },
     { $unwind: "$works" },
     {
@@ -115,8 +115,15 @@ const getWorks = asyncHandler(async (req, res) => {
         as: "work",
       },
     },
-    { $match: { "work.workTitle": { $regex: query, $options: "i" } } },
+  ];
 
+  if (searchQuery != "null") {
+    pipeline.push({
+      $match: { "work.workTitle": { $regex: searchQuery, $options: "i" } },
+    });
+  }
+
+  pipeline.push(
     {
       $group: {
         _id: null,
@@ -125,25 +132,23 @@ const getWorks = asyncHandler(async (req, res) => {
       },
     },
     { $unwind: "$data" },
-
     {
       $project: {
-        _id: 0,
+        _id: "$data.works._id",
         worksLength: 1,
         isRead: "$data.works.isRead",
-        createdAt: "$data.createdAt",
+        createdAt: "$data.work.createdAt",
         work: "$data.work",
       },
     },
-
-    { $sort: { "works.createdAt": -1 } },
+    { $sort: { createdAt: -1 } },
     { $skip: pageSize * (page - 1) },
-    { $limit: pageSize },
-  ]);
+    { $limit: pageSize }
+  );
 
-  console.log(works);
+  const works = await WorkerWork.aggregate(pipeline);
 
-  const count = works?.worksLength;
+  const count = works[0]?.worksLength;
 
   if (works) {
     res.status(200).json({ works, page, pages: Math.ceil(count / pageSize) });
@@ -153,4 +158,28 @@ const getWorks = asyncHandler(async (req, res) => {
   }
 });
 
-export { postWork, getNoOfNewWorks, getWorks };
+// @desc change status of read works
+// @route api/work/makeworksread
+// @access private
+const makeWorksRead = asyncHandler(async (req, res) => {
+  const { ids } = req.body;
+
+  if (ids) {
+    const data = await WorkerWork.findOne({ worker: req.worker._id });
+
+    data.works.forEach((value, key) => {
+      if (ids.includes(value._id.toString())) {
+        value.isRead = true;
+      }
+    });
+
+    await data.save();
+
+    res.status(201).json({ message: "Data has beeb updated!" });
+  } else {
+    res.status(404);
+    throw new Error("Not found!");
+  }
+});
+
+export { postWork, getNoOfNewWorks, getWorks, makeWorksRead };

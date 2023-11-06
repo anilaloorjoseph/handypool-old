@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import "./WorkCard.scss";
 import ViewImage from "../VIewImage/ViewImage";
 
-const WorkCard = ({ workDetails }) => {
+const WorkCard = ({ workDetails, isRead }) => {
   const [price, setPrice] = useState();
   const [workId, setWorkId] = useState();
   const [showDescription, setShowDescription] = useState(false);
@@ -21,12 +21,12 @@ const WorkCard = ({ workDetails }) => {
     image ? setImageToView(image) : setImageToView();
   };
 
-  useEffect(() => {
-    setWorkId(workDetails.id);
-  }, [workDetails]);
-
   return (
-    <div className="work-card mb-3 p-4 shadow-sm  d-flex justify-content-center align-items-center">
+    <div
+      className={`work-card mb-3 p-4 shadow-sm  d-flex justify-content-center align-items-center ${
+        isRead ? "read" : "not-read"
+      }`}
+    >
       <div className="card-content">
         <h4 className="mb-2">{workDetails.workTitle}</h4>
 

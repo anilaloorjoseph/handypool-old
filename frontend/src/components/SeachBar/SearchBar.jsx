@@ -10,7 +10,7 @@ const SearchBar = ({ placeholder, method }) => {
       className="searchbox"
       onSubmit={(e) => {
         e.preventDefault();
-        search && method(search);
+        method(search);
       }}
     >
       <div className="d-flex">
@@ -18,11 +18,11 @@ const SearchBar = ({ placeholder, method }) => {
           type="text"
           placeholder={placeholder}
           onChange={(e) => setSearch(e.target.value)}
-          className="me-1 form-control"
+          className="me-1 form-control shadow-sm"
         />
         <button
           type="submit"
-          className="button button-search d-flex justify-content-center align-items-center"
+          className="button button-search d-flex justify-content-center align-items-center shadow-sm"
         >
           <span className="material-symbols-outlined">search</span>
         </button>

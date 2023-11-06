@@ -6,6 +6,10 @@
   max-width: 100%;
   height: auto;
   border-radius: 5px;
+  &.not-read {
+    background: linear-gradient(to right bottom, $blue-white, $grey);
+    border: 2px solid $blue-white;
+  }
   .card-content {
     width: 100%;
     .work-description {

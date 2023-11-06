@@ -82,6 +82,7 @@ export const apiSlice = createApi({
     "WorkTypes",
     "GetWorks",
     "GetNoOfNewWorks",
+    "MakeWorksRead",
   ],
   endpoints: (builder) => ({}),
 });
