@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "./Nav.scss";
 import profile_photo from "../../assets/images/profile_photo.png";
 
-const Nav = () => {
+const Nav = ({ socket }) => {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
@@ -39,6 +39,7 @@ const Nav = () => {
     try {
       await logoutWorker().unwrap();
       dispatch(logout());
+      socket.emit("disconnect_worker");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

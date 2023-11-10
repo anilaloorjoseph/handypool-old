@@ -9,7 +9,7 @@ import SideNav from "./components/SideNav/SideNav";
 import { useSelector } from "react-redux";
 import Nav from "./components/Nav/Nav";
 
-function App() {
+function App({ socket }) {
   const [show, setShow] = useState(false);
   const [aboveTabScreen, setAboveTabScreen] = useState(() =>
     window.innerWidth > 768 ? true : false
@@ -39,12 +39,12 @@ function App() {
       <ToastContainer position="top-center" draggable />
 
       {!aboveTabScreen && userInfo && (
-        <SideNav show={show} handleClose={handleClose} />
+        <SideNav socket={socket} show={show} handleClose={handleClose} />
       )}
       <div className="d-flex">
         {userInfo && aboveTabScreen && location.pathname != "/" && (
           <div className="nav-wrapper me-5">
-            <Nav />
+            <Nav socket={socket} />
           </div>
         )}
         <div className="full-screen">

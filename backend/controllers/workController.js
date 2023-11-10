@@ -4,6 +4,7 @@ import CustomersWork from "../models/customersWorkModel.js";
 import Location from "../models/locationModel.js";
 import WorkerWork from "../models/workerWorkModel.js";
 import mongoose from "mongoose";
+import LiveWorker from "../models/LiveWorkerModel.js";
 
 // @desc post work
 // @route POST /api/work/post
@@ -11,6 +12,8 @@ import mongoose from "mongoose";
 const postWork = asyncHandler(async (req, res) => {
   const { workTitle, workDescription, workType, pincode, expirationDate } =
     req.body;
+
+  const io = req.io;
 
   // Extract images from req.files using a loop
   const images = [];
@@ -49,6 +52,15 @@ const postWork = asyncHandler(async (req, res) => {
       workerWork.works.push({ work: workId, isRead: false });
 
       await workerWork.save();
+    }
+
+    // sending notification of new work to workers if they are online
+    const activeWorker = await LiveWorker.find({ worker: workerId });
+    if (activeWorker) {
+      io.to(activeWorker.socketId).emit(
+        "notification",
+        `New Work has been Added: ${workTitle}`
+      );
     }
   };
 
@@ -115,6 +127,14 @@ const getWorks = asyncHandler(async (req, res) => {
         as: "work",
       },
     },
+    {
+      $lookup: {
+        from: "customers",
+        localField: "work.customer",
+        foreignField: "_id",
+        as: "customer",
+      },
+    },
   ];
 
   if (searchQuery != "null") {
@@ -139,6 +159,7 @@ const getWorks = asyncHandler(async (req, res) => {
         isRead: "$data.works.isRead",
         createdAt: "$data.work.createdAt",
         work: "$data.work",
+        customer: "$data.customer.name",
       },
     },
     { $sort: { createdAt: -1 } },

@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import "./WorkCard.scss";
 import ViewImage from "../VIewImage/ViewImage";
 
-const WorkCard = ({ workDetails, isRead }) => {
+const WorkCard = ({ workDetails, isRead, customer }) => {
   const [price, setPrice] = useState();
   const [workId, setWorkId] = useState();
   const [showDescription, setShowDescription] = useState(false);
@@ -28,9 +28,9 @@ const WorkCard = ({ workDetails, isRead }) => {
       }`}
     >
       <div className="card-content">
-        <h4 className="mb-2">{workDetails.workTitle}</h4>
-
-        <div className="locations">
+        <h4 className="mb-0">{workDetails.workTitle}</h4>
+        <span>{customer && customer}</span>
+        <div className="locations d-flex justify-content-end">
           <small className="p-1">{workDetails.pincode}</small>
         </div>
 

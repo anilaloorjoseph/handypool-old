@@ -228,6 +228,9 @@ footer {
     background-color: $primary;
     color: $blue-white;
     width: fit-content;
+    display: inline-block;
+    margin: 2px;
+    padding: 8px;
   }
 }
 

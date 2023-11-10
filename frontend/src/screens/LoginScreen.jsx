@@ -1,7 +1,7 @@
 import Login from "../components/Login/Login";
 
-const LoginScreen = () => {
-  return <Login />;
+const LoginScreen = ({ socket }) => {
+  return <Login socket={socket} />;
 };
 
 export default LoginScreen;

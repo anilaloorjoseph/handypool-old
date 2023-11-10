@@ -41,16 +41,20 @@ const WorkerWorksScreen = () => {
       setPages(data.pages);
 
       return () => {
-        (async () => {
-          const ids = data.works.map((value, key) => {
-            return value._id;
-          });
-          try {
-            const res = await makeWorksRead({ ids }).unwrap();
-          } catch (err) {
-            toast.error(err?.data?.message || err.error);
+        const read = async () => {
+          const ids = data.works.filter((value) =>
+            value.isRead ? false : value._id
+          );
+
+          if (ids.length > 0) {
+            try {
+              await makeWorksRead({ ids }).unwrap();
+            } catch (err) {
+              toast.error(err?.data?.message || err.error);
+            }
           }
-        })();
+        };
+        read();
       };
     }
     if (error) toast.error(error);
@@ -70,6 +74,7 @@ const WorkerWorksScreen = () => {
               workDetails={work.work[0]}
               key={key}
               isRead={work.isRead}
+              customer={work.customer}
             />
           );
         })}

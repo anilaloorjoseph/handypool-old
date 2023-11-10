@@ -10,16 +10,56 @@ import workerRoutes from "./routes/workerRoutes.js";
 import autoloadRoutes from "./routes/autoloadRoutes.js";
 import workRoutes from "./routes/workRoutes.js";
 import { verifyRefreshToken } from "./middleware/authMiddleware.js";
+import LiveWorker from "./models/LiveWorkerModel.js";
 import path from "path";
+import http from "http";
+import cors from "cors";
+import { Server } from "socket.io";
 
 connectDB();
 
 const app = express();
+app.use(cors());
+const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cookieParser());
+
+const io = new Server(server, {
+  cors: {
+    origin:
+      process.env.NODE_ENV === "production" ? false : `http://localhost:5173`,
+  },
+});
+
+// socket io notifications
+io.on("connection", (socket) => {
+  socket.on("worker_connected", async (workerId) => {
+    await LiveWorker.create({
+      worker: workerId,
+      socketId: socket.id,
+    });
+  });
+
+  socket.on("disconnect_worker", async () => {
+    await LiveWorker.findOneAndDelete({
+      socketId: socket.id,
+    });
+  });
+
+  socket.on("disconnect", async () => {
+    await LiveWorker.findOneAndDelete({
+      socketId: socket.id,
+    });
+  });
+});
+
+// Middleware to inject io into the request object
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 // @desc provide access key
 // @route GET /api/user/getaccesskey
@@ -47,4 +87,4 @@ app.use(notFound);
 
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server started on ${port}`));
+server.listen(port, () => console.log(`Server started on ${port}`));

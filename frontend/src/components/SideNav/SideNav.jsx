@@ -2,7 +2,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import "./SideNav.scss";
 import Nav from "../Nav/Nav";
 
-function SideNav({ show, handleClose }) {
+function SideNav({ show, handleClose, socket }) {
   return (
     <>
       <Offcanvas show={show} onHide={handleClose}>
@@ -10,7 +10,7 @@ function SideNav({ show, handleClose }) {
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Nav />
+          <Nav socket={socket} />
         </Offcanvas.Body>
       </Offcanvas>
     </>
