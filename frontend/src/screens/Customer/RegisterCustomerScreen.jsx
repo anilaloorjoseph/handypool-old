@@ -1,7 +1,7 @@
 import RegisterCustomer from "../../components/RegisterCustomer/RegisterCustomer";
 
-const RegisterCustomerScreen = ({ socket }) => {
-  return <RegisterCustomer socket={socket} />;
+const RegisterCustomerScreen = () => {
+  return <RegisterCustomer />;
 };
 
 export default RegisterCustomerScreen;

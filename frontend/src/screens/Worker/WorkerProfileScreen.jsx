@@ -211,11 +211,12 @@ const WorkerProfileScreen = () => {
                     <option>Choose type of worker</option>
                     {workTypes &&
                       workTypes.map(({ _id, type }, key) => {
-                        return (
-                          <option key={key} value={_id}>
-                            {type}
-                          </option>
-                        );
+                        if (workType === _id)
+                          return (
+                            <option key={key} value={_id}>
+                              {type}
+                            </option>
+                          );
                       })}
                   </Form.Select>
                 </Form.Group>

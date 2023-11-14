@@ -9,7 +9,7 @@ import { useLoginCustomerMutation } from "../../slices/customerApiSlice";
 import { useLoginWorkerMutation } from "../../slices/workerApiSlice";
 import { setCredentials } from "../../slices/authSlice";
 
-const Login = ({ socket }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [worker, setWorker] = useState(false);
@@ -17,7 +17,7 @@ const Login = ({ socket }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.socketEvents);
 
   const [loginCustomer, { isLoading: loadingCustomer }] =
     useLoginCustomerMutation();
@@ -25,12 +25,9 @@ const Login = ({ socket }) => {
 
   useEffect(() => {
     if (userInfo) {
-      if (userInfo.isWorker) {
-        socket.emit("worker_connected", userInfo._id);
-        navigate("/worker/profile");
-      } else {
-        navigate("/customer/profile");
-      }
+      userInfo.isWorker
+        ? navigate("/worker/profile")
+        : navigate("/customer/profile");
     }
   }, [navigate, userInfo]);
 

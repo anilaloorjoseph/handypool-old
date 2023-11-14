@@ -1,6 +1,5 @@
 import asyncHandler from "express-async-handler";
 import Work from "../models/workModel.js";
-import CustomersWork from "../models/customersWorkModel.js";
 import Location from "../models/locationModel.js";
 import WorkerWork from "../models/workerWorkModel.js";
 import mongoose from "mongoose";
@@ -32,11 +31,6 @@ const postWork = asyncHandler(async (req, res) => {
     images,
   });
 
-  const customerWork = await CustomersWork.create({
-    customer: req.customer._id,
-    works: work._id,
-  });
-
   const locationWithWorkers = await Location.find({ pincode, workType });
 
   // insert work to the workers accordingly
@@ -55,7 +49,7 @@ const postWork = asyncHandler(async (req, res) => {
     }
 
     // sending notification of new work to workers if they are online
-    const activeWorker = await LiveWorker.find({ worker: workerId });
+    const activeWorker = await LiveWorker.findOne({ worker: workerId });
     if (activeWorker) {
       io.to(activeWorker.socketId).emit(
         "notification",
@@ -79,7 +73,7 @@ const postWork = asyncHandler(async (req, res) => {
 
   // send notifications to workers
 
-  if (work && customerWork && result) {
+  if (work && result) {
     res.status(201).json({ message: "Work has been posted!" });
   } else {
     res.status(400);

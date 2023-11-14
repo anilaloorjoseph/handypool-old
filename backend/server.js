@@ -36,19 +36,16 @@ const io = new Server(server, {
 // socket io notifications
 io.on("connection", (socket) => {
   socket.on("worker_connected", async (workerId) => {
-    await LiveWorker.create({
-      worker: workerId,
-      socketId: socket.id,
-    });
+    const checkLiveWorker = await LiveWorker.findOne({ worker: workerId });
+    if (!checkLiveWorker) {
+      await LiveWorker.create({
+        worker: workerId,
+        socketId: socket.id,
+      });
+    }
   });
 
   socket.on("disconnect_worker", async () => {
-    await LiveWorker.findOneAndDelete({
-      socketId: socket.id,
-    });
-  });
-
-  socket.on("disconnect", async () => {
     await LiveWorker.findOneAndDelete({
       socketId: socket.id,
     });

@@ -23,22 +23,14 @@ import CustomerSettingsScreen from "./screens/Customer/CustomerSettingsScreen";
 import WorkerSettingsScreen from "./screens/Worker/WorkerSettingsScreen";
 import CustomerPostsScreen from "./screens/Customer/CustomerPostsScreen";
 import WorkerWorksScreen from "./screens/Worker/WorkerWorksScreen";
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000");
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App socket={socket} />}>
+    <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/login" element={<LoginScreen socket={socket} />} />
-      <Route
-        path="/customer/register"
-        element={<RegisterCustomerScreen socket={socket} />}
-      />
-      <Route
-        path="/worker/register"
-        element={<RegisterWorkerScreen socket={socket} />}
-      />
+      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/customer/register" element={<RegisterCustomerScreen />} />
+      <Route path="/worker/register" element={<RegisterWorkerScreen />} />
 
       <Route path="" element={<CustomerPrivateRoute />}>
         {/* customer private routes */}

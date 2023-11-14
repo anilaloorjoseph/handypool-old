@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 import { validateEmail } from "../../utilities/validate";
 
-const RegisterWorker = ({ socket }) => {
+const RegisterWorker = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -28,12 +28,7 @@ const RegisterWorker = ({ socket }) => {
 
   useEffect(() => {
     if (userInfo) {
-      if (userInfo.isWorker) {
-        socket.emit("worker_connected", userInfo._id);
-        navigate("/worker/profile");
-      } else {
-        navigate("/");
-      }
+      userInfo.isWorker ? navigate("/worker/profile") : navigate("/");
     }
   }, [navigate, userInfo]);
 
