@@ -43,6 +43,7 @@ const Login = () => {
         : await loginCustomer({ email, password }).unwrap();
 
       dispatch(setCredentials({ ...res }));
+      navigate("/worker/profile");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

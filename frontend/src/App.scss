@@ -73,7 +73,6 @@ label {
     }
   }
   &.button-add {
-    color: $secondary;
     background-color: $primary-button;
     &:hover {
       background-color: $secondary;
@@ -82,10 +81,15 @@ label {
   }
   &.button-inverse {
     background-color: $primary;
-    color: $secondary;
+
     &:hover {
       background-color: $primary-button;
-      color: $secondary;
+    }
+  }
+  &.button-search {
+    background-color: $primary-button;
+    &:hover {
+      background-color: $primary;
     }
   }
 }

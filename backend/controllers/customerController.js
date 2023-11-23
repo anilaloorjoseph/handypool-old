@@ -7,6 +7,7 @@ import fs from "fs";
 // @route POST /api/customer/login
 // @access Public
 const authCustomer = asyncHandler(async (req, res) => {
+  // Logic to authenticate customer based on provided email and password
   const { email, password } = req.body;
   const customer = await Customer.findOne({ email });
 
@@ -32,6 +33,7 @@ const authCustomer = asyncHandler(async (req, res) => {
 // @route POST /api/customer/register
 // @access Public
 const registerCustomer = asyncHandler(async (req, res) => {
+  // Logic to register a new customer with unique email and password
   const { name, email, password } = req.body;
   const customerExists = await Customer.findOne({ email });
 
@@ -64,6 +66,7 @@ const registerCustomer = asyncHandler(async (req, res) => {
 // @route POST /api/customer/logout
 // @access Public
 const logoutCustomer = asyncHandler(async (req, res) => {
+  // Logic to clear refresh token cookie for customer logout
   res
     .clearCookie("refreshToken", "", { httpOnly: true, sameSite: "Strict" })
     .end();
@@ -73,6 +76,7 @@ const logoutCustomer = asyncHandler(async (req, res) => {
 // @route GET /api/customer/profile
 // @access Private
 const getCustomerProfile = asyncHandler(async (req, res) => {
+  // Logic to fetch and return customer profile data
   // req.customer is already set from authentication protect method using token
   const customerProfile = {
     _id: req.customer._id,
@@ -90,6 +94,7 @@ const getCustomerProfile = asyncHandler(async (req, res) => {
 // @route POST /api/customer/profile
 // @access Private
 const updateCustomerProfile = asyncHandler(async (req, res) => {
+  // Logic to update customer profile information
   const { name, email, location, phone, password } = req.body;
 
   const customer = await Customer.findById(req.customer._id);
@@ -146,6 +151,7 @@ const updateCustomerProfile = asyncHandler(async (req, res) => {
 // @route DELETE /api/customer/profile
 // @access Private
 const deleteCustomerProfile = asyncHandler(async (req, res) => {
+  // Logic to delete customer account based on password verification
   const { password } = req.body;
 
   const customer = await Customer.findById(req.customer._id);

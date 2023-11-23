@@ -33,6 +33,7 @@ const Nav = ({ socket }) => {
     try {
       await logoutCustomer().unwrap();
       dispatch(logout());
+      socket.emit("disconnect_customer");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

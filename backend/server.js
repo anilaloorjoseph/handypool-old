@@ -9,8 +9,10 @@ import customerRoutes from "./routes/customerRoutes.js";
 import workerRoutes from "./routes/workerRoutes.js";
 import autoloadRoutes from "./routes/autoloadRoutes.js";
 import workRoutes from "./routes/workRoutes.js";
+import priceRoutes from "./routes/priceRoutes.js";
 import { verifyRefreshToken } from "./middleware/authMiddleware.js";
 import LiveWorker from "./models/LiveWorkerModel.js";
+import LiveCustomer from "./models/LiveCustomerModel.js";
 import path from "path";
 import http from "http";
 import cors from "cors";
@@ -35,6 +37,24 @@ const io = new Server(server, {
 
 // socket io notifications
 io.on("connection", (socket) => {
+  socket.on("customer_connected", async (customerId) => {
+    const checkLiveCustomer = await LiveCustomer.findOne({
+      customer: customerId,
+    });
+    if (!checkLiveCustomer) {
+      await LiveCustomer.create({
+        customer: customerId,
+        socketId: socket.id,
+      });
+    }
+  });
+
+  socket.on("disconnect_customer", async () => {
+    await LiveCustomer.findOneAndDelete({
+      socketId: socket.id,
+    });
+  });
+
   socket.on("worker_connected", async (workerId) => {
     const checkLiveWorker = await LiveWorker.findOne({ worker: workerId });
     if (!checkLiveWorker) {
@@ -46,6 +66,15 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect_worker", async () => {
+    await LiveWorker.findOneAndDelete({
+      socketId: socket.id,
+    });
+  });
+
+  socket.on("disconnect", async () => {
+    await LiveCustomer.findOneAndDelete({
+      socketId: socket.id,
+    });
     await LiveWorker.findOneAndDelete({
       socketId: socket.id,
     });
@@ -67,6 +96,7 @@ app.use("/api/customer", customerRoutes);
 app.use("/api/worker", workerRoutes);
 app.use("/api/autoload", autoloadRoutes);
 app.use("/api/work", workRoutes);
+app.use("/api/price", priceRoutes);
 
 // Location static folder for image upload
 const __dirname = path.resolve();

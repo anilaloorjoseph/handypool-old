@@ -57,13 +57,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    socket.current.on("notification", (data) => {
+    socket.current.on("worker_notification_fetch_works", (data) => {
       dispatch(eventRefetchWorks(true));
       toast.info(data);
     });
 
     if (userInfo?.isWorker) {
       socket.current.emit("worker_connected", userInfo._id);
+    }
+    if (!userInfo?.isWorker) {
+      socket.current.emit("customer_connected", userInfo._id);
     }
   }, [userInfo]);
 

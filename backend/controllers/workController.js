@@ -9,18 +9,18 @@ import LiveWorker from "../models/LiveWorkerModel.js";
 // @route POST /api/work/post
 // @access private
 const postWork = asyncHandler(async (req, res) => {
+  // Extracting necessary data from the request body
   const { workTitle, workDescription, workType, pincode, expirationDate } =
     req.body;
 
   const io = req.io;
-
-  // Extract images from req.files using a loop
+  // Extracting images from req.files using a loop (up to 4 images)
   const images = [];
   for (let i = 1; i <= 4; i++) {
     const key = `workImage${i}`;
     images.push(req.files[key] ? req.files[key][0].path : undefined);
   }
-
+  // Finding locations with matching pincode and workType
   const work = await Work.create({
     customer: req.customer._id,
     workTitle,
@@ -33,8 +33,9 @@ const postWork = asyncHandler(async (req, res) => {
 
   const locationWithWorkers = await Location.find({ pincode, workType });
 
-  // insert work to the workers accordingly
+  // Function to insert work to the workers accordingly
   const insertWork = async (workerId, workId) => {
+    // Logic to add work to WorkerWork model based on location
     let workerWork = await WorkerWork.findOne({ worker: workerId });
 
     if (!workerWork) {
@@ -48,16 +49,15 @@ const postWork = asyncHandler(async (req, res) => {
       await workerWork.save();
     }
 
-    // sending notification of new work to workers if they are online
     const activeWorker = await LiveWorker.findOne({ worker: workerId });
     if (activeWorker) {
       io.to(activeWorker.socketId).emit(
-        "notification",
+        "worker_notification_fetch_works",
         `New Work has been Added: ${workTitle}`
       );
     }
   };
-
+  // Storing works in workers based on locations
   const storeWorksInWorkers = Promise.all(
     locationWithWorkers.map(async (locationWithWorker, key) => {
       try {
@@ -71,8 +71,7 @@ const postWork = asyncHandler(async (req, res) => {
 
   const result = await storeWorksInWorkers;
 
-  // send notifications to workers
-
+  // Sending response based on success or failure
   if (work && result) {
     res.status(201).json({ message: "Work has been posted!" });
   } else {
@@ -85,6 +84,7 @@ const postWork = asyncHandler(async (req, res) => {
 // @route api/work/getnewworks
 // @access private
 const getNoOfNewWorks = asyncHandler(async (req, res) => {
+  // Logic to get the number of unread works for a worker
   const worker = await WorkerWork.findOne({
     worker: req.worker._id,
   });
@@ -104,6 +104,7 @@ const getNoOfNewWorks = asyncHandler(async (req, res) => {
 // @route api/work/getworks
 // @access private
 const getWorks = asyncHandler(async (req, res) => {
+  // Logic to retrieve works for a worker with pagination and filtering
   const searchQuery = req.query.query || "";
 
   const page = req.query.page || 1;
@@ -177,6 +178,7 @@ const getWorks = asyncHandler(async (req, res) => {
 // @route api/work/makeworksread
 // @access private
 const makeWorksRead = asyncHandler(async (req, res) => {
+  // Logic to mark specific works as read for a worker
   const { ids } = req.body;
 
   if (ids) {

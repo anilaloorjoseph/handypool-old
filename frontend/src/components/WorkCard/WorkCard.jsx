@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import "./WorkCard.scss";
 import ViewImage from "../VIewImage/ViewImage";
+import { useSendPriceMutation } from "../../slices/priceApiSlice";
+import { toast } from "react-toastify";
 
 const WorkCard = ({ workDetails, isRead, customer }) => {
   const [price, setPrice] = useState();
@@ -10,9 +12,13 @@ const WorkCard = ({ workDetails, isRead, customer }) => {
   const [viewImage, setViewImage] = useState(false);
   const [imageToView, setImageToView] = useState();
 
-  const sendPrice = (e) => {
+  const [sendPrice, { isloading }] = useSendPriceMutation();
+
+  const pricing = async (e) => {
     e.preventDefault();
     if (price) {
+      const res = await sendPrice(price);
+      res && toast.success(res);
     }
   };
 
@@ -76,12 +82,14 @@ const WorkCard = ({ workDetails, isRead, customer }) => {
         <hr />
         <div className="d-flex align-items-center">
           <p className="work-expiration p-1 w-50 me-1 ms-0 my-0 text-center">
+            {/* checking expiration date is over or not. if it is not over, it will show */}
             Expires at :
-            {workDetails.expirationDate
+            {new Date(work.expirationDate).getTime() > Date.now() &&
+            workDetails.expirationDate
               ? new Date(workDetails.expirationDate).toLocaleDateString()
               : "##/##/####"}
           </p>
-          <Form onSubmit={sendPrice} className="w-50">
+          <Form onSubmit={pricing} className="w-50">
             <div className="d-flex">
               <Form.Control
                 type="number"
