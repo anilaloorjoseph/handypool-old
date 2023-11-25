@@ -44,11 +44,13 @@ function App() {
     // socket.current.on("connect", () => {
     //   console.log(socket.current.id);
     // });
+
     const closeWindow = () => {
       if (socket.current) {
-        socket.current.emit("disconnect_worker");
+        socket.current.emit("disconnect");
       }
     };
+
     window.addEventListener("beforeunload", closeWindow);
     return () => {
       socket.current.disconnect();
@@ -63,10 +65,10 @@ function App() {
     });
 
     if (userInfo?.isWorker) {
-      socket.current.emit("worker_connected", userInfo._id);
+      socket.current.emit("worker_connected", userInfo?._id);
     }
-    if (!userInfo?.isWorker) {
-      socket.current.emit("customer_connected", userInfo._id);
+    if (userInfo?.isWorker === false) {
+      socket.current.emit("customer_connected", userInfo?._id);
     }
   }, [userInfo]);
 

@@ -3,7 +3,7 @@ import Work from "../models/workModel.js";
 import Location from "../models/locationModel.js";
 import WorkerWork from "../models/workerWorkModel.js";
 import mongoose from "mongoose";
-import LiveWorker from "../models/LiveWorkerModel.js";
+import LiveWorker from "../models/liveWorkerModel.js";
 
 // @desc post work
 // @route POST /api/work/post
@@ -153,11 +153,13 @@ const getWorks = asyncHandler(async (req, res) => {
         worksLength: 1,
         isRead: "$data.works.isRead",
         createdAt: "$data.work.createdAt",
+        expirationDate: "$data.work.expirationDate",
         work: "$data.work",
         customer: "$data.customer.name",
       },
     },
     { $sort: { createdAt: -1 } },
+    { $sort: { expirationDate: -1 } },
     { $skip: pageSize * (page - 1) },
     { $limit: pageSize }
   );

@@ -17,7 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userInfo } = useSelector((state) => state.socketEvents);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const [loginCustomer, { isLoading: loadingCustomer }] =
     useLoginCustomerMutation();
@@ -25,7 +25,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      userInfo.isWorker
+      userInfo?.isWorker
         ? navigate("/worker/profile")
         : navigate("/customer/profile");
     }
@@ -43,7 +43,6 @@ const Login = () => {
         : await loginCustomer({ email, password }).unwrap();
 
       dispatch(setCredentials({ ...res }));
-      navigate("/worker/profile");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

@@ -24,11 +24,14 @@
     .work-expiration {
       border-radius: 5px;
       font-size: 15px;
-      color: $text;
-      font-weight: 500;
-      font-style: italic;
-      background: linear-gradient(to right, $grey, $title, $grey);
       color: $secondary;
+      font-weight: 500;
+      background: $grey;
+    }
+    .work-expiration-expired {
+      color: $secondary;
+      border-radius: 5px;
+      background-color: $black-transparent;
     }
     .work-images {
       img,
@@ -46,6 +49,13 @@
           color: $text;
         }
       }
+    }
+    .work-response {
+      background-color: $grey;
+      border-radius: 5px;
+    }
+    .show-work-response {
+      cursor: pointer;
     }
   }
 }

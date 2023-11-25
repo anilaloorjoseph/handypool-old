@@ -80,7 +80,7 @@ const WorkerWorksScreen = () => {
         works.map((work, key) => {
           return (
             <WorkCard
-              workDetails={work.work[0]}
+              work={work.work[0]}
               key={key}
               isRead={work.isRead}
               customer={work.customer}

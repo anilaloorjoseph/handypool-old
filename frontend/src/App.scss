@@ -79,11 +79,12 @@ label {
       color: $primary;
     }
   }
+
   &.button-inverse {
     background-color: $primary;
-
     &:hover {
       background-color: $primary-button;
+      color: $secondary;
     }
   }
   &.button-search {

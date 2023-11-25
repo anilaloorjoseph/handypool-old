@@ -5,19 +5,27 @@ import ViewImage from "../VIewImage/ViewImage";
 import { useSendPriceMutation } from "../../slices/priceApiSlice";
 import { toast } from "react-toastify";
 
-const WorkCard = ({ workDetails, isRead, customer }) => {
+const WorkCard = ({ work, isRead, customer }) => {
   const [price, setPrice] = useState();
   const [workId, setWorkId] = useState();
+  const [details, setDetails] = useState();
   const [showDescription, setShowDescription] = useState(false);
   const [viewImage, setViewImage] = useState(false);
   const [imageToView, setImageToView] = useState();
+  const [showWorkResponse, setShowWorkResponse] = useState(false);
+
+  const expirationTime = new Date(work.expirationDate).getTime();
+  const isExpired = expirationTime <= Date.now();
+  const expirationClass = isExpired
+    ? "work-expiration-expired"
+    : "work-expiration";
 
   const [sendPrice, { isloading }] = useSendPriceMutation();
 
   const pricing = async (e) => {
     e.preventDefault();
-    if (price) {
-      const res = await sendPrice(price);
+    if (workId && price && !isExpired) {
+      const res = await sendPrice({ workId, price, details });
       res && toast.success(res);
     }
   };
@@ -27,6 +35,10 @@ const WorkCard = ({ workDetails, isRead, customer }) => {
     image ? setImageToView(image) : setImageToView();
   };
 
+  useEffect(() => {
+    setWorkId(work._id);
+  }, [work]);
+
   return (
     <div
       className={`work-card mb-3 p-4 shadow-sm  d-flex justify-content-center align-items-center ${
@@ -34,10 +46,20 @@ const WorkCard = ({ workDetails, isRead, customer }) => {
       }`}
     >
       <div className="card-content">
-        <h4 className="mb-0">{workDetails.workTitle}</h4>
+        <h4 className="mb-0">{work.workTitle}</h4>
         <span>{customer && customer}</span>
-        <div className="locations d-flex justify-content-end">
-          <small className="p-1">{workDetails.pincode}</small>
+        <div className="locations d-flex justify-content-between">
+          <p className={`${expirationClass} py-1 ms-0 my-0 px-2 text-center`}>
+            {/* checking expiration date is over or not. if it is not over, it will show */}
+            Expires at:{" "}
+            {work.expirationDate
+              ? isExpired
+                ? "Expired"
+                : new Date(expirationTime).toLocaleDateString()
+              : "Expired"}
+          </p>
+
+          <small className="p-1">{work.pincode}</small>
         </div>
 
         <div className="work-description my-2 p-2 hide-text">
@@ -55,11 +77,11 @@ const WorkCard = ({ workDetails, isRead, customer }) => {
               </span>
             </button>
           </div>
-          {showDescription && workDetails.workDescription}
+          {showDescription && work.workDescription}
         </div>
         <div className="work-images d-flex justify-content-between">
-          {workDetails.images &&
-            workDetails.images.map((image, key) => {
+          {work.images &&
+            work.images.map((image, key) => {
               return image ? (
                 <img
                   src={image}
@@ -79,32 +101,50 @@ const WorkCard = ({ workDetails, isRead, customer }) => {
               );
             })}
         </div>
-        <hr />
-        <div className="d-flex align-items-center">
-          <p className="work-expiration p-1 w-50 me-1 ms-0 my-0 text-center">
-            {/* checking expiration date is over or not. if it is not over, it will show */}
-            Expires at :
-            {new Date(work.expirationDate).getTime() > Date.now() &&
-            workDetails.expirationDate
-              ? new Date(workDetails.expirationDate).toLocaleDateString()
-              : "##/##/####"}
-          </p>
-          <Form onSubmit={pricing} className="w-50">
-            <div className="d-flex">
-              <Form.Control
-                type="number"
-                className="me-2"
-                placeholder="price"
-                min="0"
-                onChange={(e) => setPrice(e.target.value)}
-              />
-              <button type="submit" className="button-add button shadow">
-                send
-              </button>
-            </div>
-          </Form>
-          {viewImage && <ViewImage showImage={showImage} image={imageToView} />}
-        </div>
+
+        {!isExpired && (
+          <>
+            <hr />
+            {!showWorkResponse && (
+              <div
+                className="show-work-response button w-100 text-center"
+                onClick={() => setShowWorkResponse(true)}
+              >
+                Send Response
+              </div>
+            )}
+            {showWorkResponse && (
+              <div className="work-response d-flex align-items-center">
+                <Form onSubmit={pricing} className="w-100 p-2">
+                  <Form.Control
+                    type="number"
+                    className="my-2"
+                    placeholder="price"
+                    min="0"
+                    onChange={(e) => setPrice(e.target.value)}
+                  />
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Details..."
+                    className="my-2"
+                    value={details}
+                    style={{ height: "100px" }}
+                    onChange={(e) => setDetails(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="button-add button shadow ms-auto d-block"
+                  >
+                    send
+                  </button>
+                </Form>
+                {viewImage && (
+                  <ViewImage showImage={showImage} image={imageToView} />
+                )}
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

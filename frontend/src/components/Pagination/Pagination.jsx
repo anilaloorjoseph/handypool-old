@@ -5,7 +5,11 @@ const Pagination = ({ page, pages, method }) => {
   const [pageValue, setPageValue] = useState(page ? page : "");
 
   const askPage = (e) => {
-    if (e.target.value > pages) return false;
+    const inputValue = e.target.value;
+
+    if (inputValue > pages || inputValue.charAt(0) === "0") {
+      return false;
+    }
     setPageValue(e.target.value);
     let timer;
     clearTimeout(timer);

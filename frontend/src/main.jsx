@@ -23,10 +23,15 @@ import CustomerSettingsScreen from "./screens/Customer/CustomerSettingsScreen";
 import WorkerSettingsScreen from "./screens/Worker/WorkerSettingsScreen";
 import CustomerPostsScreen from "./screens/Customer/CustomerPostsScreen";
 import WorkerWorksScreen from "./screens/Worker/WorkerWorksScreen";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route
+      element={<App />}
+      // error element to show if no route found
+      errorElement={<h1>This page is not availbale !</h1>}
+    >
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/customer/register" element={<RegisterCustomerScreen />} />

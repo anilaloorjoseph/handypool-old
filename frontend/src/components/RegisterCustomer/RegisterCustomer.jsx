@@ -24,9 +24,9 @@ const RegisterCustomer = () => {
 
   useEffect(() => {
     if (userInfo) {
-      userInfo.isWorker
-        ? navigate("/worker/profile")
-        : navigate("/customer/profile");
+      userInfo.isWorker === false
+        ? navigate("/customer/profile")
+        : navigate("/");
     }
   }, [navigate, userInfo]);
 
@@ -55,14 +55,15 @@ const RegisterCustomer = () => {
           password,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
-        navigate("/customer/profile");
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="login-register mb-5 shadow-lg mx-auto p-3">
       <h2 className="py-2 text-center">Register</h2>
       <Form onSubmit={submitHandler}>
@@ -129,8 +130,6 @@ const RegisterCustomer = () => {
           </button>
         </div>
       </Form>
-
-      {isLoading && <Loader />}
     </div>
   );
 };
