@@ -24,14 +24,14 @@
     .work-expiration {
       border-radius: 5px;
       font-size: 15px;
-      color: $secondary;
+      color: $grey;
       font-weight: 500;
-      background: $grey;
+      border: $grey 1px solid;
     }
     .work-expiration-expired {
-      color: $secondary;
+      color: $black-transparent;
       border-radius: 5px;
-      background-color: $black-transparent;
+      border: $grey 1px solid;
     }
     .work-images {
       img,
@@ -50,10 +50,7 @@
         }
       }
     }
-    .work-response {
-      background-color: $grey;
-      border-radius: 5px;
-    }
+
     .show-work-response {
       cursor: pointer;
     }

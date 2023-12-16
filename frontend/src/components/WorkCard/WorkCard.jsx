@@ -51,18 +51,17 @@ const WorkCard = ({ work, isRead, customer }) => {
         <div className="locations d-flex justify-content-between">
           <p className={`${expirationClass} py-1 ms-0 my-0 px-2 text-center`}>
             {/* checking expiration date is over or not. if it is not over, it will show */}
-            Expires at:{" "}
             {work.expirationDate
               ? isExpired
                 ? "Expired"
-                : new Date(expirationTime).toLocaleDateString()
+                : `Expires on${new Date(expirationTime).toLocaleDateString()}`
               : "Expired"}
           </p>
 
           <small className="p-1">{work.pincode}</small>
         </div>
 
-        <div className="work-description my-2 p-2 hide-text">
+        <div className="work-description my-2 py-2 hide-text">
           <div
             className="work-description-header d-flex justify-content-between align-items-center"
             onClick={(e) => {

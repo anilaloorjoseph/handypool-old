@@ -111,6 +111,8 @@ const getWorks = asyncHandler(async (req, res) => {
 
   const pageSize = 3;
 
+  const showExpired = req.query.showExpired === "true" || false;
+
   const pipeline = [
     { $match: { worker: new mongoose.Types.ObjectId(req.worker._id) } },
     { $unwind: "$works" },
@@ -132,9 +134,17 @@ const getWorks = asyncHandler(async (req, res) => {
     },
   ];
 
-  if (searchQuery != "null") {
+  if (searchQuery) {
     pipeline.push({
       $match: { "work.workTitle": { $regex: searchQuery, $options: "i" } },
+    });
+  }
+
+  if (!showExpired) {
+    pipeline.push({
+      $match: {
+        "work.expirationDate": { $gte: new Date(new Date().toISOString()) },
+      },
     });
   }
 
@@ -159,7 +169,6 @@ const getWorks = asyncHandler(async (req, res) => {
       },
     },
     { $sort: { createdAt: -1 } },
-    { $sort: { expirationDate: -1 } },
     { $skip: pageSize * (page - 1) },
     { $limit: pageSize }
   );

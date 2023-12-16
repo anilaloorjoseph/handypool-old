@@ -31,7 +31,9 @@ app.use(cookieParser());
 const io = new Server(server, {
   cors: {
     origin:
-      process.env.NODE_ENV === "production" ? false : `http://localhost:5173`,
+      process.env.NODE_ENV === "production"
+        ? "http://www.handypool.in"
+        : `http://localhost:5173`,
   },
 });
 

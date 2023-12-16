@@ -10,12 +10,14 @@ import { toast } from "react-toastify";
 import SearchBar from "../../components/SeachBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { eventRefetchWorks } from "../../slices/socketEventsSlice";
+import { Form } from "react-bootstrap";
 
 const WorkerWorksScreen = () => {
   const [works, setWorks] = useState([]);
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [showExpired, setShowExpired] = useState(false);
 
   const searchQuery = (value) => {
     setQuery(value);
@@ -36,6 +38,7 @@ const WorkerWorksScreen = () => {
   } = useGetWorksQuery({
     page,
     query,
+    showExpired,
   });
 
   const [makeWorksRead, { isLoading }] = useMakeworksReadMutation();
@@ -76,6 +79,13 @@ const WorkerWorksScreen = () => {
       <div className="w-100 my-4">
         <SearchBar placeholder={"Search works.."} method={searchQuery} />
       </div>
+      <Form.Group className="mb-3 mt-4 d-flex" controlId="checkbox1">
+        <Form.Check
+          type="checkbox"
+          label="Show expired works"
+          onChange={() => setShowExpired(!showExpired)}
+        />
+      </Form.Group>
       {works &&
         works.map((work, key) => {
           return (
