@@ -1,0 +1,35 @@
+@import "../../sass/variables";
+
+.pagination {
+  .prev,
+  .next {
+    border-radius: 5px;
+    background-color: $primary-button;
+    transition: all 0.5s;
+    user-select: none;
+    color: $secondary;
+    span {
+      width: 14px;
+    }
+    &:hover {
+      cursor: pointer;
+      color: $primary-button;
+      background-color: $secondary;
+    }
+  }
+
+  .current {
+    background-color: $secondary;
+    border-radius: 5px;
+    .current-page {
+      width: 30px;
+      height: 30px;
+      border: 0;
+      background-color: $blue-white;
+      border-radius: 5px;
+      &:focus-visible {
+        outline: 0;
+      }
+    }
+  }
+}

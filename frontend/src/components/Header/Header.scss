@@ -4,8 +4,9 @@
 
 .header {
   z-index: 100;
-  position: absolute;
+  position: fixed;
   top: 0;
+  background-color: $secondary;
   // logo
   .logo {
     width: 100px;

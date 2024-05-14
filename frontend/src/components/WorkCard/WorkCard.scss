@@ -5,23 +5,33 @@
   min-width: 320px;
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 5px;
+  &.not-read {
+    background: linear-gradient(to right bottom, $blue-white, $grey);
+    border: 2px solid $blue-white;
+  }
   .card-content {
     width: 100%;
     .work-description {
-      border-radius: 5px;
       color: $text;
       font-size: 14px;
       width: 100%;
-      position: relative;
+      border-radius: 5px;
+      button {
+        user-select: none;
+      }
     }
     .work-expiration {
+      border-radius: 5px;
       font-size: 15px;
-      color: $text;
+      color: $grey;
       font-weight: 500;
-      font-style: italic;
-      background: linear-gradient(to right, $grey, $title, $grey);
-      color: $secondary;
+      border: $grey 1px solid;
+    }
+    .work-expiration-expired {
+      color: $black-transparent;
+      border-radius: 5px;
+      border: $grey 1px solid;
     }
     .work-images {
       img,
@@ -30,13 +40,19 @@
         height: 80px;
         object-fit: cover;
       }
+      img {
+        cursor: pointer;
+      }
       .no-image {
         border: 1px dashed $text;
-
         span {
           color: $text;
         }
       }
+    }
+
+    .show-work-response {
+      cursor: pointer;
     }
   }
 }

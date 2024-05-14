@@ -9,18 +9,8 @@ const responseSchema = mongoose.Schema(
     },
     details: { type: String, required: false },
     price: { type: Number, required: true },
-    accepted: { type: Boolean, default: false },
-  },
-  { timestamps: true }
-);
-
-const acceptedWorkerSchema = mongoose.Schema(
-  {
-    worker: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      ref: "Worker",
-    },
+    isAccepted: { type: Boolean, default: false },
+    isReadByCustomer: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
@@ -59,7 +49,6 @@ const workSchema = mongoose.Schema(
       type: Date,
       required: true,
     },
-    acceptedWorkers: [acceptedWorkerSchema],
     responses: [responseSchema],
   },
   { timestamps: true }

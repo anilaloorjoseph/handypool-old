@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
 
+const workWithReadAttribute = mongoose.Schema({
+  work: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Work",
+  },
+  isRead: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+});
+
 const workerWorkSchema = mongoose.Schema(
   {
     worker: {
@@ -7,20 +20,7 @@ const workerWorkSchema = mongoose.Schema(
       required: true,
       ref: "Worker",
     },
-    works: [
-      {
-        work: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: "Work",
-        },
-        isRead: {
-          type: Boolean,
-          required: true,
-          default: false,
-        },
-      },
-    ],
+    works: [workWithReadAttribute],
   },
   { timestamps: true }
 );

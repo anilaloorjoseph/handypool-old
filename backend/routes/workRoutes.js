@@ -3,6 +3,7 @@ import {
   postWork,
   getNoOfNewWorks,
   getWorks,
+  makeWorksRead,
 } from "../controllers/workController.js";
 
 import upload from "./uploadRoutes.js";
@@ -26,5 +27,7 @@ router.post(
 router.get("/getnoofnewworks", protect, getNoOfNewWorks);
 
 router.get("/getworks", protect, getWorks);
+
+router.put("/makeworksread", protect, makeWorksRead);
 
 export default router;

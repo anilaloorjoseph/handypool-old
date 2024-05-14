@@ -1,0 +1,10 @@
+@import "../../sass/variables";
+
+.searchbox {
+  input[type="text"].form-control {
+    background-color: $secondary;
+    &:focus {
+      background-color: $secondary;
+    }
+  }
+}

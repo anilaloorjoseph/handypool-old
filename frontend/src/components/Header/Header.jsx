@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import WorkPost from "../WorkPost/WorkPost";
+import WorkPost from "../Popup/WorkPost/WorkPost";
 
 const Header = ({ handleShow }) => {
   const [work, setWork] = useState(false);

@@ -1,9 +1,9 @@
-@import "../../sass/variables";
+@import "../../../sass/variables";
 
 .popup-work {
   width: 100%;
   min-height: 100vh;
-  position: absolute;
+  position: fixed;
   overflow-y: auto;
   z-index: 999;
   background-color: $black-transparent;
@@ -17,7 +17,7 @@
     backdrop-filter: blur(5px);
     position: absolute;
     background-color: $secondary;
-    background-image: url("../../assets/images/login-register.svg");
+    background-image: url("../../../assets/images/login-register.svg");
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: contain;

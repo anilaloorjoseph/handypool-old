@@ -211,11 +211,12 @@ const WorkerProfileScreen = () => {
                     <option>Choose type of worker</option>
                     {workTypes &&
                       workTypes.map(({ _id, type }, key) => {
-                        return (
-                          <option key={key} value={_id}>
-                            {type}
-                          </option>
-                        );
+                        if (workType === _id)
+                          return (
+                            <option key={key} value={_id}>
+                              {type}
+                            </option>
+                          );
                       })}
                   </Form.Select>
                 </Form.Group>
@@ -241,10 +242,7 @@ const WorkerProfileScreen = () => {
                     <div className="locations mt-2">
                       {locations.map((value, index) => {
                         return (
-                          <small
-                            className="p-2 m-1"
-                            key={index}
-                          >
+                          <small key={index}>
                             {value}
                             <CloseButton
                               className="ms-2"

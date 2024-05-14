@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Form, CloseButton } from "react-bootstrap";
-import { useWorkTypesQuery } from "../../slices/autoloadApiSlice";
-import { useWorkPostMutation } from "../../slices/workApiSlice";
+import { useWorkTypesQuery } from "../../../slices/autoloadApiSlice";
+import { useWorkPostMutation } from "../../../slices/workApiSlice";
 import { useSelector } from "react-redux";
 import "./WorkPost.scss";
-import Loader from "../Loader/Loader";
+import Loader from "../../Loader/Loader";
 import { toast } from "react-toastify";
-import { validatePincode } from "../../utilities/validate";
+import { validatePincode } from "../../../utilities/validate";
 
 const Work = ({ switchPopup }) => {
   const [workTitle, setWorkTitle] = useState();
@@ -95,7 +95,7 @@ const Work = ({ switchPopup }) => {
   return loadingWorkPost || isLoading ? (
     <Loader />
   ) : (
-    <div className="popup-work d-flex justify-content-center ">
+    <div className="popup-work d-flex justify-content-center">
       <div className="window-work p-4 m-4 shadow-lg">
         <div className="d-flex justify-content-between w-100 ">
           <h4>Post Your Work</h4>

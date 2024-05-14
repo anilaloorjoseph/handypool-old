@@ -28,9 +28,7 @@ const RegisterWorker = () => {
 
   useEffect(() => {
     if (userInfo) {
-      userInfo.isWorker
-        ? navigate("/worker/profile")
-        : navigate("/worker/profile");
+      userInfo.isWorker ? navigate("/worker/profile") : navigate("/");
     }
   }, [navigate, userInfo]);
 
@@ -62,7 +60,6 @@ const RegisterWorker = () => {
         workType,
       }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate("/worker/profile");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

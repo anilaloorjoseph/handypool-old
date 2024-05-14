@@ -7,11 +7,13 @@ import { logout } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import "./Nav.scss";
 import profile_photo from "../../assets/images/profile_photo.png";
+import { useEffect } from "react";
 
-const Nav = () => {
+const Nav = ({ socket }) => {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
+  const { refetchWorks } = useSelector((state) => state.socketEvents);
 
   const [logoutCustomer, { isLoading }] = useLogoutCustomerMutation();
   const [logoutWorker, { isLoading: loadingWorker }] =
@@ -22,6 +24,7 @@ const Nav = () => {
     isFetching,
     isLoading: isLoadingNewNoOfWorks,
     error,
+    refetch,
   } = useGetNoOfNewWorksQuery(undefined, {
     skip: userInfo.isWorker ? false : true,
   });
@@ -30,6 +33,7 @@ const Nav = () => {
     try {
       await logoutCustomer().unwrap();
       dispatch(logout());
+      socket.emit("disconnect_customer");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -39,10 +43,17 @@ const Nav = () => {
     try {
       await logoutWorker().unwrap();
       dispatch(logout());
+      socket.emit("disconnect_worker");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
   };
+
+  useEffect(() => {
+    if (refetchWorks) {
+      refetch();
+    }
+  }, [refetchWorks]);
 
   return (
     <div className="d-flex flex-column menu full-height pt-5">

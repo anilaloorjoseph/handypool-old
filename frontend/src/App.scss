@@ -18,9 +18,13 @@ h3 {
   color: $title;
 }
 h4,
-h5,
-h6 {
+h5 {
   color: $primary;
+  margin: 0;
+}
+
+h6 {
+  color: $title;
   margin: 0;
 }
 
@@ -45,10 +49,11 @@ label {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   background-color: $primary-button;
+  border-radius: 5px;
   &:hover {
     background-color: $blue-white;
     color: $primary-button;
-    box-shadow: inset 0px 0px 5px 1px $primary-button;
+    box-shadow: inset 0px 0px 5px 1px $black-transparent;
   }
   &.button-delete {
     color: $red;
@@ -58,20 +63,34 @@ label {
       color: $blue-white;
     }
   }
+  &.button-expand {
+    color: $primary;
+    padding: 0;
+    background-color: $secondary;
+    &:hover {
+      background-color: $secondary;
+      color: $title;
+    }
+  }
   &.button-add {
-    color: $secondary;
     background-color: $primary-button;
     &:hover {
       background-color: $secondary;
       color: $primary;
     }
   }
+
   &.button-inverse {
     background-color: $primary;
-    color: $secondary;
     &:hover {
       background-color: $primary-button;
       color: $secondary;
+    }
+  }
+  &.button-search {
+    background-color: $primary-button;
+    &:hover {
+      background-color: $primary;
     }
   }
 }
@@ -96,10 +115,9 @@ form {
   textarea.form-control,
   .form-select {
     border: none;
-    border-radius: 0px;
+    border-radius: 5px;
     background-color: $blue-white;
     color: $text;
-
     transform: translateY(0);
     transition: transform 0.3s ease-in-out;
     &:focus {
@@ -155,13 +173,13 @@ form {
 
 .form-box {
   background-color: $secondary;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 // login register box
 .login-register {
   background-color: $secondary;
-  border-radius: 10px;
+  border-radius: 5px;
   max-width: 400px;
   background-image: url("./assets/images/login-register.svg");
   background-position: bottom;
@@ -186,7 +204,7 @@ input[type="file"] {
     height: 100%;
     border: 1px solid $primary;
     position: absolute;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 2px dashed $primary;
     font-weight: 600;
   }
@@ -215,6 +233,9 @@ footer {
     background-color: $primary;
     color: $blue-white;
     width: fit-content;
+    display: inline-block;
+    margin: 2px;
+    padding: 8px;
   }
 }
 
@@ -238,9 +259,10 @@ hr {
   font-size: 12px;
 }
 
-.text-limited-3l {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+// .text-limited-3l {
+//   display: -webkit-box;
+//   -webkit-line-clamp: 3;
+//   -webkit-box-orient: vertical;
+//   overflow: hidden;
+
+// }

@@ -25,7 +25,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      userInfo.isWorker
+      userInfo?.isWorker
         ? navigate("/worker/profile")
         : navigate("/customer/profile");
     }
@@ -43,9 +43,6 @@ const Login = () => {
         : await loginCustomer({ email, password }).unwrap();
 
       dispatch(setCredentials({ ...res }));
-      userInfo.isWorker
-        ? navigate("/worker/profile")
-        : navigate("/customer/profile");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
