@@ -5,18 +5,21 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 const port = process.env.PORT || 5000;
+import { verifyRefreshToken } from "./middleware/authMiddleware.js";
+import path from "path";
+import http from "http";
+import cors from "cors";
+import { Server } from "socket.io";
+// routes
 import customerRoutes from "./routes/customerRoutes.js";
 import workerRoutes from "./routes/workerRoutes.js";
 import autoloadRoutes from "./routes/autoloadRoutes.js";
 import workRoutes from "./routes/workRoutes.js";
 import priceRoutes from "./routes/priceRoutes.js";
-import { verifyRefreshToken } from "./middleware/authMiddleware.js";
+//models
 import LiveWorker from "./models/liveWorkerModel.js";
 import LiveCustomer from "./models/liveCustomerModel.js";
-import path from "path";
-import http from "http";
-import cors from "cors";
-import { Server } from "socket.io";
+
 
 connectDB();
 
